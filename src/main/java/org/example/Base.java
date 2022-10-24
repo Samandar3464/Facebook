@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public abstract class Base {
      private static int idgen=0;
-     protected int id;
+     private int id;
 
      public Base() {
           this.id=idgen++;
