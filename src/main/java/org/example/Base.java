@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public abstract class Base {
-     private static int idGeneration=0;
-     protected int id;
+     private static int idgen=0;
+     private int id;
 
      public Base() {
-          this.id=idGeneration++;
+          this.id=idgen++;
      }
 
 }
