@@ -6,5 +6,6 @@ public class Main {
         System.out.println(true);
         System.out.println("GIT");
         System.out.println("Hello Git");
+        System.out.println("last check");
     }
 }
