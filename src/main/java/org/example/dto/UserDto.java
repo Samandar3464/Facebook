@@ -35,7 +35,7 @@ public class UserDto {
                 gender="Female";
             }
         }
-        return new User(firstName,lastName,phoneNumber,password,gender,birthday);
+
+return new User(firstName,lastName,phoneNumber,password,gender,birthday);
     }
 }
-
