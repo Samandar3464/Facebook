@@ -10,7 +10,7 @@ public class UserService {
 
 
 
-    public  boolean Registration(User user){
+    public  boolean registration(User user){
         if(login(user.getPhoneNumber())!=null){
             return false;
         }
@@ -49,8 +49,6 @@ public class UserService {
             }
         }return false;
     }
-
-
     public User getById(int userId) {
         for (User allUser : allUsers) {
             if (allUser!=null){
