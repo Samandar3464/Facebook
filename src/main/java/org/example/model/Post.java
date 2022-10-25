@@ -10,9 +10,8 @@ import java.util.*;
 @NoArgsConstructor
 public class Post extends Base {
     private int ownerId;
-    private Object post;
+    public Object post;
     private int likes;
-    private int postId;
 
 
 
