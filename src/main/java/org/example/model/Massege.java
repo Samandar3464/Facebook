@@ -8,5 +8,6 @@ public class Massege extends Base {
     private  int senderId;
     private  int receiverId;
     private String massage;
+    private  String senderName;
 
 }
