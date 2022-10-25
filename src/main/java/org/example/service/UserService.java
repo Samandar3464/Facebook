@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-    static List<User> allUsers = new ArrayList<>();
+
 
 
     public boolean registration(User user) {
@@ -37,19 +37,6 @@ public class UserService {
             }
         }
         return 0;
-    }
-
-
-    public boolean delete(int id) {
-        for (User user : allUsers) {
-            if (user.getId() != 0) {
-                if (user.getId() == id) {
-                    allUsers.remove(user);
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
 
