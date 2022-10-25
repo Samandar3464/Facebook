@@ -8,12 +8,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class NotificationService {
-    Stack<Notification> notifications =null;
-
-
     public void showNotificationDefaultUser(User user) throws IOException {
-
-        for (Notification notification : notifications) {
+        for (Notification notification : DataBase.notifications) {
             if (notification != null) {
                 if (notification.getType().equals("request")) {
                     if (notification.getReceiverId() == user.getId()) {
@@ -31,16 +27,38 @@ public class NotificationService {
             }
         }
     }
-    public boolean deleteRequest(User user) {
-        for (Notification notification : notifications) {
+    public boolean deleteRequest(User user ,int requestId) {
+        for (Notification notification : DataBase.notifications) {
             if (notification != null) {
                 if (notification.getType().equals("request")) {
-                    if (notification.getReceiverId() == user.getId()) {
-                        return notifications.remove(notification);
+                    if (notification.getReceiverId() == user.getId()&&notification.getId()==requestId) {
+                        return DataBase.notifications.remove(notification);
                     }
                 }
             }
         }
         return false;
+    }
+    public Notification OneRequest(User user ,int requestId) {
+        for (Notification notification : DataBase.notifications) {
+            if (notification != null) {
+                if (notification.getType().equals("request")) {
+                    if (notification.getReceiverId() == user.getId()&&notification.getId()==requestId) {
+                        return notification;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    public int getById(int notificationId){
+        for (Notification notification1 : DataBase.notifications) {
+            if (notification1!=null){
+                if (notification1.getId()==notificationId){
+                    return notification1.getSenderId();
+                }
+            }
+        }
+        return 0;
     }
 }

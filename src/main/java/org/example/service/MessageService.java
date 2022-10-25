@@ -9,16 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public  class MessageService {
+public class MessageService {
     public boolean addMessage(Massege massege) throws IOException {
         DataBase.massages.put(massege.getId(), massege);
         return true;
     }
 
     public boolean deleteMessage(int messageId, int userid) throws IOException {
-        if (DataBase.massages.get(messageId)!=null&&DataBase.massages.get(messageId).getSenderId()==userid){
-            DataBase.massages.remove(messageId);
-            return true;
+        for (Integer integer : DataBase.massages.keySet()) {
+            if (integer == messageId && DataBase.massages.get(integer).getSenderId() == userid) {
+                DataBase.massages.remove(integer);
+                return true;
+            }
         }
         return false;
     }

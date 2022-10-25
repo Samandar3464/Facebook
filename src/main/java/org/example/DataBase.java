@@ -13,20 +13,18 @@ import java.util.Stack;
 
 public class DataBase {
     public static Gson gson = new Gson();
-    public static BufferedWriter bufferedWriter=null;
+    public static BufferedWriter bufferedWriter = null;
 
 
+    public static HashMap<Integer, Massege> massages = new HashMap<>();
+    public static HashMap<Integer, Chat> chats = new HashMap<>();
+    public static HashMap<Integer, Commit> commits = new HashMap<>();
+    public static HashMap<Integer, Post> posts = new HashMap<>();
+    public static Stack<Notification> notifications = new Stack<>();
+    public static ArrayList<User> allUsers = new ArrayList<>();
 
 
-    public static HashMap<Integer, Massege> massages=null;
-    public static HashMap<Integer, Chat> chats=null;
-    public static HashMap<Integer, Commit> commits=null;
-    public static HashMap<Integer, Post> posts=null;
-    public  static Stack<Notification> notifications =null;
-    public static ArrayList<User> allUsers=null;
-
-
-    public  static void start() throws IOException {
+    public static void start() throws IOException {
 //        MESSAGE
 
         File massage = new File("files\\massage.txt");
@@ -40,7 +38,7 @@ public class DataBase {
         File user = new File("files\\users.txt");
         user.createNewFile();
         FileReader userFileReader = new FileReader(user);
-        allUsers = gson.fromJson(userFileReader, new TypeToken<List<User>>() {
+        allUsers = gson.fromJson(userFileReader, new TypeToken<ArrayList<User>>() {
         }.getType());
         messageFileReader.close();
 
@@ -77,8 +75,9 @@ public class DataBase {
         }.getType());
         postFileReader.close();
     }
+
     public static void save() throws IOException {
-        String s=null;
+        String s = null;
 //        MESSAGE
         File massageFile = new File("files\\massages.txt");
         massageFile.createNewFile();
