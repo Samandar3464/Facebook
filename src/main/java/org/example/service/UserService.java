@@ -8,8 +8,6 @@ import java.util.List;
 public class UserService {
     static List<User> allUsers =new ArrayList<>();
 
-
-
     public  boolean registration(User user){
         if(login(user.getPhoneNumber())!=null){
             return false;

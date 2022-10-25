@@ -4,42 +4,46 @@ import org.example.model.Post;
 
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.Scanner;
 
-public class PostService {
+public class PostService extends Post {
 
-    public static Scanner scannerint = new Scanner(System.in);
-    public static Scanner scannersrt = new Scanner(System.in);
-    public static HashMap<Integer,Objects> posts = new HashMap<>();
+//    public static Post post = new Post();
+    public static int count = 0;
+    public static HashMap<Integer, Post> posts = new HashMap<>();
 
-    public boolean add(){
+    public boolean add(Post post){
+        if(getOwnerId()!=0) {
+            posts.put(getOwnerId(), post);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean remove(Post post){
+        if(post.getId()!=0){
+            posts.remove(post.getId());
+            return true;
+        }
+        return false;
+    }
+    public boolean like(){
+        count++;
         return true;
     }
 
-    public boolean addPost(int ownId,Objects post){
-        if(ownId!=0 && post!=null){
-            posts.put(ownId,post);
-        }
+    public boolean dislike(){
+        count--;
         return true;
     }
 
-    public void start(){
-        int var = 10;
-        while (var!=0){
-            System.out.println("1. Add Commit , 2. Click like botton 3. Back");
-            var = scannerint.nextInt();
-            switch (var){
-                case 1->{
-                    System.out.println("write your commit");
-//                    write code
-                }
-                case 2->{
-                    System.out.println("like like like");
-//                    click like botton
-                }
-            }
-        }
+//    public static HashMap<Integer,Post> posts = new HashMap<>();
+//    public static HashMap<Integer, Commit> commits = new HashMap<>();
+//    public static ArrayList<HashMap<Integer, Objects>> posts = new ArrayList<>();
+
+    public void print(){
+        System.out.println(posts);
     }
+
 
 
 
