@@ -1,4 +1,4 @@
-package org.example.Service;
+package org.example.service;
 
 import org.example.model.User;
 
@@ -10,7 +10,7 @@ public class UserService {
 
 
 
-    public  boolean Registration(User user){
+    public  boolean registration(User user){
         if(login(user.getPhoneNumber())!=null){
             return false;
         }
@@ -52,6 +52,13 @@ public class UserService {
 
 
     public Object getById(int id) {
+        for (User allUser : allUsers) {
+            if (allUser != null) {
+                if (allUser.getId() == id) {
+                    return allUser;
+                }
+            }
+        }
         return null;
     }
 }
