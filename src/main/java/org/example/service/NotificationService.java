@@ -6,7 +6,6 @@ import org.example.model.User;
 import java.util.*;
 
 public class NotificationService {
-    UserService userService = new UserService();  /// object olingan ochirish kk
     Stack<Notification> notifications = new Stack<>();
 
 
@@ -18,9 +17,9 @@ public class NotificationService {
                         System.out.println(notification);
                     }
                 } else {
-                    for (User contact : userService.contacts) {
-                        if (contact != null) {
-                            if (contact.getId() == notification.getSenderId()) {
+                    for (Integer contactId : user.getFriendsId()) {
+                        if (contactId != null) {
+                            if (contactId == notification.getSenderId()) {
                                 System.out.println(notification);
                             }
                         }
@@ -30,12 +29,13 @@ public class NotificationService {
         }
     }
 
-    public User requestSandedUser(User user){
+    public User requestSandedUser(User user) {
+        UserService userService = new UserService();  // object
         for (Notification notification : notifications) {
-            if (notification!=null){
-                if (notification.getType().equals("request")){
-                    if (notification.getReceiverId()==user.getId()){
-                      return   userService.getUserById(notification.getSenderId());
+            if (notification != null) {
+                if (notification.getType().equals("request")) {
+                    if (notification.getReceiverId() == user.getId()) {
+                        return userService.getById(notification.getSenderId());
                     }
                 }
             }
@@ -43,4 +43,22 @@ public class NotificationService {
         return null;
     }
 
+    public boolean requestConfirmation(User user, User requestSandedUser) {  // request ni tasdiqlash
+        user.getFriendsId().add(requestSandedUser.getId());
+        requestSandedUser.getFriendsId().add(user.getId());
+        return true;
+    }
+
+    public boolean deleteRequest(User user) {
+        for (Notification notification : notifications) {
+            if (notification != null) {
+                if (notification.getType().equals("request")) {
+                    if (notification.getReceiverId() == user.getId()) {
+                        return notifications.remove(notification);
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

@@ -1,4 +1,4 @@
-package org.example.Service;
+package org.example.service;
 
 import org.example.model.User;
 
@@ -51,7 +51,14 @@ public class UserService {
     }
 
 
-    public Object getById(int id) {
+    public User getById(int userId) {
+        for (User allUser : allUsers) {
+            if (allUser!=null){
+                if (allUser.getId()==userId){
+                    return allUser;
+                }
+            }
+        }
         return null;
     }
 }
