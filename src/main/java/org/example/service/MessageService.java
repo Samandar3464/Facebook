@@ -10,19 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 public  class MessageService {
-
+    HashMap<Integer,Massege> messages=null;
     public boolean addMessage(Massege massege) throws IOException {
 
 
        return true;
     }
     public boolean deleteMessage(int messageId, int userid) throws IOException {
-               HashMap<Integer,Massege> messages = DataBase.massageRead();
-        if (messages.get(messageId)!=null&&messages.get(messageId).getSenderId()==userid){
-            messages.remove(messageId);
-            DataBase.massageWrite(messages);
-        }
-        return false;
+   return true;
     }
 //    public Massege getMessageById(int messageId){
 //
