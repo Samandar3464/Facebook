@@ -7,6 +7,6 @@ import org.example.Base;
 public class Massege extends Base {
     private  int senderId;
     private  int receiverId;
-    private Object massage;
+    private String massage;
 
 }
