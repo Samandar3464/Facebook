@@ -51,10 +51,10 @@ public class UserService {
     }
 
 
-    public Object getById(int id) {
+    public User getById(int userId) {
         for (User allUser : allUsers) {
             if (allUser != null) {
-                if (allUser.getId() == id) {
+                if (allUser.getId() == userId) {
                     return allUser;
                 }
             }
