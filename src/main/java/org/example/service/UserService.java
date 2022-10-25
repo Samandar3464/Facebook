@@ -6,50 +6,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-   static List<User> allUsers =new ArrayList<>();
+    static List<User> allUsers = new ArrayList<>();
 
 
-
-    public  boolean registration(User user){
-        if(login(user.getPhoneNumber())!=null){
+    public boolean registration(User user) {
+        if (login(user.getPhoneNumber()) != null) {
             return false;
         }
         allUsers.add(user);
         return true;
     }
 
-    public User login(String phoneNumber){
+    public User login(String phoneNumber) {
         for (User user : allUsers) {
-            if(user!=null){
-                if(user.getPhoneNumber().equals(phoneNumber)){
+            if (user != null) {
+                if (user.getPhoneNumber().equals(phoneNumber)) {
                     return user;
                 }
             }
-        }return null;
+        }
+        return null;
     }
 
-  public int getIdByPhoneNumber(String phoneNumber){
-      for (User user : allUsers) {
-          if(user!=null){
-              if(user.getPhoneNumber().equals(phoneNumber)){
-                  return user.getId();
-              }
-          }
-      }return 0;
-  }
+    public int getIdByPhoneNumber(String phoneNumber) {
+        for (User user : allUsers) {
+            if (user != null) {
+                if (user.getPhoneNumber().equals(phoneNumber)) {
+                    return user.getId();
+                }
+            }
+        }
+        return 0;
+    }
 
 
     public boolean delete(int id) {
         for (User user : allUsers) {
-            if(user.getId()!=0) {
+            if (user.getId() != 0) {
                 if (user.getId() == id) {
                     allUsers.remove(user);
                     return true;
                 }
             }
-        }return false;
+        }
+        return false;
     }
-
 
 
     public User getById(int userId) {
