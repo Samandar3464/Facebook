@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import org.example.model.*;
 
 import java.io.*;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,116 +12,148 @@ import java.util.Stack;
 
 public class DataBase {
     public static Gson gson = new Gson();
-    public static BufferedWriter bufferedWriter = null;
 
-    public static HashMap<Integer, Massege> massages = new HashMap<>();
-    public static HashMap<Integer, Chat> chats = new HashMap<>();
-    public static HashMap<Integer, Commit> commits = new HashMap<>();
-    public static HashMap<Integer, String> posts = new HashMap<>();
-    public static Stack<Notification> notifications = new Stack<>();
-    public static ArrayList<User> allUsers = new ArrayList<>();
+    public static boolean writeUser(User newUser) throws IOException {
+        ArrayList<User> users = readUser();
+        users.add(newUser);
+        File file = new File("files\\users.txt");
+        file.createNewFile();
+        String s = gson.toJson(users);
+        BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(file)));
+        bufferedWriter.write(s);
+        bufferedWriter.close();
+        return true;
+    }
 
-
-    public static void start() throws IOException {
-//        MESSAGE
-
-        File massage = new File("files\\massage.txt");
-        massage.createNewFile();
-        FileReader messageFileReader = new FileReader(massage);
-        massages = gson.fromJson(messageFileReader, new TypeToken<HashMap<Integer, Massege>>() {
+    public static ArrayList<User> readUser() throws IOException {
+        File file = new File("files\\users.txt");
+        file.createNewFile();
+        FileReader fileReader = new FileReader(file);
+        ArrayList<User> usersList = gson.fromJson(fileReader, new TypeToken<List<User>>() {
         }.getType());
-        messageFileReader.close();
-
-//        USER
-        File user = new File("files\\users.txt");
-        user.createNewFile();
-        FileReader userFileReader = new FileReader(user);
-        allUsers = gson.fromJson(userFileReader, new TypeToken<ArrayList<User>>() {
-        }.getType());
-        messageFileReader.close();
+        fileReader.close();
+        return usersList;
+    }
 
 
-//        CHAT
-        File chatFile = new File("files\\chats.txt");
-        chatFile.createNewFile();
-        FileReader charFileReader = new FileReader(chatFile);
-        chats = gson.fromJson(charFileReader, new TypeToken<HashMap<Integer, Chat>>() {
-        }.getType());
-        charFileReader.close();
+    public static boolean notificationsWrite(Notification newNotification) throws IOException {
+        Stack<Notification> notifications = notificationsRead();
 
-//        COMMIT
-        File commit = new File("files\\commits.txt");
-        commit.createNewFile();
-        FileReader commitFileReader = new FileReader(commit);
-        commits = gson.fromJson(commitFileReader, new TypeToken<HashMap<Integer, Commit>>() {
-        }.getType());
-        commitFileReader.close();
+        notifications.add(newNotification);
+        File notification = new File("files\\notifications.txt");
 
-//        NOTIFICATION
+        notification.createNewFile();
+        String s = gson.toJson(notifications);
+        BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(notification)));
+        bufferedWriter.write(s);
+        bufferedWriter.close();
+        return true;
+    }
+
+    public static Stack<Notification> notificationsRead() throws IOException {
         File notification = new File("files\\notifications.txt");
         notification.createNewFile();
-        FileReader notificationFileReader = new FileReader(notification);
-        notifications = gson.fromJson(notificationFileReader, new TypeToken<Stack<Notification>>() {
+        FileReader fileReader = new FileReader(notification);
+        Stack<Notification> notifications = gson.fromJson(fileReader, new TypeToken<Stack<Notification>>() {
         }.getType());
-        notificationFileReader.close();
+        fileReader.close();
+        return notifications;
+    }
 
-//        POST
+
+    public static boolean postWrite(Post post) throws IOException {
+        HashMap<Integer, Post> posts = postRead();
+        posts.put(post.getOwnerId(), post);
+        File postFile = new File("files\\posts.txt");
+
+        postFile.createNewFile();
+        String s = gson.toJson(posts);
+        BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(postFile)));
+        bufferedWriter.write(s);
+        bufferedWriter.close();
+        return true;
+    }
+
+    public static HashMap<Integer, Post> postRead() throws IOException {
         File post = new File("files\\posts.txt");
         post.createNewFile();
-        FileReader postFileReader = new FileReader(post);
-        posts = gson.fromJson(postFileReader, new TypeToken<HashMap<Integer, Post>>() {
+        FileReader fileReader = new FileReader(post);
+        HashMap<Integer, Post> posts = gson.fromJson(fileReader, new TypeToken<HashMap<Integer, Post>>() {
         }.getType());
-        postFileReader.close();
+        fileReader.close();
+        return posts;
     }
 
-    public static void save() throws IOException {
-        String s = null;
-//        MESSAGE
-        File massageFile = new File("files\\massages.txt");
-        massageFile.createNewFile();
-        s = gson.toJson(massages);
-        bufferedWriter = new BufferedWriter((new FileWriter(massageFile)));
-        bufferedWriter.write(s);
-        bufferedWriter.close();
 
-//        CHAT
-        File chatFile = new File("files\\chats.txt");
-        chatFile.createNewFile();
-        s = gson.toJson(chats);
-        bufferedWriter = new BufferedWriter((new FileWriter(chatFile)));
-        bufferedWriter.write(s);
-        bufferedWriter.close();
-
-//        COMMIT
+    public static boolean commitWrite(Commit commit) throws IOException {
+        HashMap<Integer, Commit> commits = commitRead();
+        commits.put(commit.getId(), commit);
         File commitFile = new File("files\\commits.txt");
         commitFile.createNewFile();
-        s = gson.toJson(commits);
-        bufferedWriter = new BufferedWriter((new FileWriter(commitFile)));
+        String s = gson.toJson(commits);
+        BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(commitFile)));
         bufferedWriter.write(s);
         bufferedWriter.close();
-
-//        NOTIFICATION
-        File notification = new File("files\\notifications.txt");
-        notification.createNewFile();
-        s = gson.toJson(notifications);
-        bufferedWriter = new BufferedWriter((new FileWriter(notification)));
-        bufferedWriter.write(s);
-        bufferedWriter.close();
-
-//        POST
-        File postFile = new File("files\\posts.txt");
-        postFile.createNewFile();
-        s = gson.toJson(posts);
-        bufferedWriter = new BufferedWriter((new FileWriter(postFile)));
-        bufferedWriter.write(s);
-        bufferedWriter.close();
-
-//        USER
-        File userWrite = new File("files\\users.txt");
-        userWrite.createNewFile();
-        s = gson.toJson(allUsers);
-        bufferedWriter = new BufferedWriter((new FileWriter(userWrite)));
-        bufferedWriter.write(s);
-        bufferedWriter.close();
+        return true;
     }
+
+    public static HashMap<Integer, Commit> commitRead() throws IOException {
+        File commit = new File("files\\commits.txt");
+        commit.createNewFile();
+        FileReader fileReader = new FileReader(commit);
+        HashMap<Integer, Commit> commits = gson.fromJson(fileReader, new TypeToken<HashMap<Integer, Commit>>() {
+        }.getType());
+        fileReader.close();
+        return commits;
+    }
+
+
+    public static boolean massageWrite(Massege massege) throws IOException {
+        HashMap<Integer, Massege> massages = massageRead();
+        massages.put(massege.getId(), massege);
+        File massageFile = new File("files\\massages.txt");
+
+        massageFile.createNewFile();
+        String s = gson.toJson(massages);
+        BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(massageFile)));
+        bufferedWriter.write(s);
+        bufferedWriter.close();
+        return true;
+    }
+
+    public static HashMap<Integer, Massege> massageRead() throws IOException {
+        File massage = new File("files\\massage.txt");
+        massage.createNewFile();
+        FileReader fileReader = new FileReader(massage);
+        HashMap<Integer, Massege> massages = gson.fromJson(fileReader, new TypeToken<HashMap<Integer, Massege>>() {
+        }.getType());
+        fileReader.close();
+        return massages;
+    }
+
+
+    public static boolean chatWrite(Chat chat) throws IOException {
+        HashMap<Integer, Chat> chats = chatRead();
+        chats.put(chat.getId(), chat);
+        File chatFile = new File("files\\chats.txt");
+
+        chatFile.createNewFile();
+        String s = gson.toJson(chats);
+        BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(chatFile)));
+        bufferedWriter.write(s);
+        bufferedWriter.close();
+        return true;
+    }
+
+    public static HashMap<Integer, Chat> chatRead() throws IOException {
+        File chatFie = new File("files\\chats.txt");
+        chatFie.createNewFile();
+        FileReader fileReader = new FileReader(chatFie);
+        HashMap<Integer, Chat> chats = gson.fromJson(fileReader, new TypeToken<HashMap<Integer, Chat>>() {
+        }.getType());
+        fileReader.close();
+        return chats;
+    }
+
+
 }
