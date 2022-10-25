@@ -13,12 +13,11 @@ import java.util.Stack;
 public class DataBase {
     public static Gson gson = new Gson();
 
-    public static boolean writeUser(User newUser) throws IOException {
-        ArrayList<User> users = readUser();
-        users.add(newUser);
+    public static boolean writeUser(ArrayList usersList) throws IOException {
+
         File file = new File("files\\users.txt");
         file.createNewFile();
-        String s = gson.toJson(users);
+        String s = gson.toJson(usersList);
         BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(file)));
         bufferedWriter.write(s);
         bufferedWriter.close();
@@ -36,12 +35,8 @@ public class DataBase {
     }
 
 
-    public static boolean notificationsWrite(Notification newNotification) throws IOException {
-        Stack<Notification> notifications = notificationsRead();
-
-        notifications.add(newNotification);
+    public static boolean notificationsWrite(Stack <Notification> notifications) throws IOException {
         File notification = new File("files\\notifications.txt");
-
         notification.createNewFile();
         String s = gson.toJson(notifications);
         BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(notification)));
@@ -61,11 +56,8 @@ public class DataBase {
     }
 
 
-    public static boolean postWrite(Post post) throws IOException {
-        HashMap<Integer, Post> posts = postRead();
-        posts.put(post.getOwnerId(), post);
+    public static boolean postWrite(HashMap<Integer, Post> posts) throws IOException {
         File postFile = new File("files\\posts.txt");
-
         postFile.createNewFile();
         String s = gson.toJson(posts);
         BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(postFile)));
@@ -85,9 +77,7 @@ public class DataBase {
     }
 
 
-    public static boolean commitWrite(Commit commit) throws IOException {
-        HashMap<Integer, Commit> commits = commitRead();
-        commits.put(commit.getId(), commit);
+    public static boolean commitWrite(HashMap<Integer, Commit> commits) throws IOException {
         File commitFile = new File("files\\commits.txt");
         commitFile.createNewFile();
         String s = gson.toJson(commits);
@@ -108,9 +98,7 @@ public class DataBase {
     }
 
 
-    public static boolean massageWrite(Massege massege) throws IOException {
-        HashMap<Integer, Massege> massages = massageRead();
-        massages.put(massege.getId(), massege);
+    public static boolean massageWrite(HashMap<Integer, Massege> massages) throws IOException {
         File massageFile = new File("files\\massages.txt");
 
         massageFile.createNewFile();
@@ -132,11 +120,8 @@ public class DataBase {
     }
 
 
-    public static boolean chatWrite(Chat chat) throws IOException {
-        HashMap<Integer, Chat> chats = chatRead();
-        chats.put(chat.getId(), chat);
+    public static boolean chatWrite(HashMap<Integer, Chat> chats) throws IOException {
         File chatFile = new File("files\\chats.txt");
-
         chatFile.createNewFile();
         String s = gson.toJson(chats);
         BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(chatFile)));
