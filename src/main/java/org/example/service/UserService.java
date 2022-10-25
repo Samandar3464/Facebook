@@ -51,6 +51,7 @@ public class UserService {
     }
 
 
+
     public User getById(int userId) {
         for (User allUser : allUsers) {
             if (allUser != null) {
