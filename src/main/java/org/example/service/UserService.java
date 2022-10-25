@@ -1,62 +1,61 @@
 package org.example.service;
 
-import org.example.DataBase;
 import org.example.model.User;
 
-public class UserService {
+import java.util.ArrayList;
+import java.util.List;
 
-    public boolean registration(User user) {
-       // DataBase.allUsers=new ArrayList<>();
-            for (User allUser : DataBase.allUsers) {
-                if (allUser != null) {
-                    if (allUser.getPhoneNumber().equals(user.getPhoneNumber())) {
-                       // DataBase.allUsers.add(user);
-                        return false;
-                    }
-                }
-            }
-        DataBase.allUsers.add(user);
+public class UserService {
+   static List<User> allUsers =new ArrayList<>();
+
+
+
+    public  boolean registration(User user){
+        if(login(user.getPhoneNumber())!=null){
+            return false;
+        }
+        allUsers.add(user);
         return true;
     }
-  
-    public User logIn(String phoneNumber, String password) {
-        if (DataBase.allUsers == null) return null;
-        for (User user : DataBase.allUsers) {
-            if (user !=null){
-                if (user.getPhoneNumber().equals(phoneNumber)&& user.getPassword().equals(password)){
+
+    public User login(String phoneNumber){
+        for (User user : allUsers) {
+            if(user!=null){
+                if(user.getPhoneNumber().equals(phoneNumber)){
                     return user;
                 }
             }
-        }
-        return null;
+        }return null;
     }
 
-    public User uptoDateAccount(int userId){
-        for (User allUser : DataBase.allUsers) {
-            if (allUser!=null){
-                if (allUser.getId()==userId){
-                    return getById(userId);
+  public int getIdByPhoneNumber(String phoneNumber){
+      for (User user : allUsers) {
+          if(user!=null){
+              if(user.getPhoneNumber().equals(phoneNumber)){
+                  return user.getId();
+              }
+          }
+      }return 0;
+  }
 
+
+    public boolean delete(int id) {
+        for (User user : allUsers) {
+            if(user.getId()!=0) {
+                if (user.getId() == id) {
+                    allUsers.remove(user);
+                    return true;
                 }
             }
-        }
-    return null;
+        }return false;
     }
 
-    public void showUserAccount(User user){
-        for (User allUser : DataBase.allUsers) {
-            if (allUser!=null){
-                if (allUser.equals(user)){
-                    System.out.println(user);
-                }
-            }
-        }
-    }
-    public User getById(int userId) {
-        for (User user : DataBase.allUsers) {
-            if (user != null) {
-                if (user.getId() == userId) {
-                    return user;
+
+    public Object getById(int id) {
+        for (User allUser : allUsers) {
+            if (allUser != null) {
+                if (allUser.getId() == id) {
+                    return allUser;
                 }
             }
         }
