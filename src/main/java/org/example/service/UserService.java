@@ -1,60 +1,63 @@
 package org.example.service;
 
-import org.example.DataBase;
 import org.example.model.User;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
+   static List<User> allUsers =new ArrayList<>();
 
-    public boolean registration(User user) {
-            for (User allUser : DataBase.allUsers) {
-                if (allUser != null&&allUser.isActive()) {
-                    if (allUser.getPhoneNumber().equals(user.getPhoneNumber())||allUser.getUserName().equals(user.getUserName())) {
-                        return false;
-                    }
-                }
-            }
-        DataBase.allUsers.add(user);
+
+
+    public  boolean registration(User user){
+        if(login(user.getPhoneNumber())!=null){
+            return false;
+        }
+        allUsers.add(user);
         return true;
     }
-  
-    public User logIn(String phoneNumber, String password) {
-        if (DataBase.allUsers == null) return null;
-        for (User user : DataBase.allUsers) {
-            if (user !=null){
-                if (user.isActive()&&user.getPhoneNumber().equals(phoneNumber)&& user.getPassword().equals(password)){
+
+    public User login(String phoneNumber){
+        for (User user : allUsers) {
+            if(user!=null){
+                if(user.getPhoneNumber().equals(phoneNumber)){
                     return user;
                 }
             }
-        }
-        return null;
+        }return null;
     }
+
+  public int getIdByPhoneNumber(String phoneNumber){
+      for (User user : allUsers) {
+          if(user!=null){
+              if(user.getPhoneNumber().equals(phoneNumber)){
+                  return user.getId();
+              }
+          }
+      }return 0;
+  }
+
+
+    public boolean delete(int id) {
+        for (User user : allUsers) {
+            if(user.getId()!=0) {
+                if (user.getId() == id) {
+                    allUsers.remove(user);
+                    return true;
+                }
+            }
+        }return false;
+    }
+
+
     public User getById(int userId) {
-        for (User user : DataBase.allUsers) {
-            if (user != null&&user.isActive()) {
-                if (user.getId() == userId) {
-                    return user;
+        for (User allUser : allUsers) {
+            if (allUser != null) {
+                if (allUser.getId() == userId) {
+                    return allUser;
                 }
             }
-        }
-        return null;
-    }
-
-    public  void showFriends(User user){
-        for (User allUser : DataBase.allUsers) {
-            if (allUser!=null&&allUser.isActive()){
-                if (allUser.equals(user)){
-                    System.out.println(allUser.getFriendsId());
-                }
-            }
-        }
-    }
-
-    public User getByUserName(String userName) {
-        for (User allUser : DataBase.allUsers) {
-            if (allUser!=null&&allUser.isActive()&&allUser.getUserName().equals(userName)) return allUser;
         }
         return null;
     }
