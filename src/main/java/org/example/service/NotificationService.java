@@ -1,16 +1,15 @@
 package org.example.service;
 
+import org.example.DataBase;
 import org.example.model.Notification;
 import org.example.model.User;
 
+import java.io.IOException;
 import java.util.*;
 
 public class NotificationService {
-    Stack<Notification> notifications = new Stack<>();
-
-
-    public void showNotificationDefaultUser(User user) {
-        for (Notification notification : notifications) {
+    public void showNotificationDefaultUser(User user) throws IOException {
+        for (Notification notification : DataBase.notifications) {
             if (notification != null) {
                 if (notification.getType().equals("request")) {
                     if (notification.getReceiverId() == user.getId()) {
@@ -28,37 +27,38 @@ public class NotificationService {
             }
         }
     }
-
-    public User requestSandedUser(User user) {
-        UserService userService = new UserService();  // object
-        for (Notification notification : notifications) {
+    public boolean deleteRequest(User user ,int requestId) {
+        for (Notification notification : DataBase.notifications) {
             if (notification != null) {
                 if (notification.getType().equals("request")) {
-                    if (notification.getReceiverId() == user.getId()) {
-                        return userService.getById(notification.getSenderId());
+                    if (notification.getReceiverId() == user.getId()&&notification.getId()==requestId) {
+                        return DataBase.notifications.remove(notification);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public Notification OneRequest(User user ,int requestId) {
+        for (Notification notification : DataBase.notifications) {
+            if (notification != null) {
+                if (notification.getType().equals("request")) {
+                    if (notification.getReceiverId() == user.getId()&&notification.getId()==requestId) {
+                        return notification;
                     }
                 }
             }
         }
         return null;
     }
-
-    public boolean requestConfirmation(User user, User requestSandedUser) {  // request ni tasdiqlash
-        user.getFriendsId().add(requestSandedUser.getId());
-        requestSandedUser.getFriendsId().add(user.getId());
-        return true;
-    }
-
-    public boolean deleteRequest(User user) {
-        for (Notification notification : notifications) {
-            if (notification != null) {
-                if (notification.getType().equals("request")) {
-                    if (notification.getReceiverId() == user.getId()) {
-                        return notifications.remove(notification);
-                    }
+    public int getById(int notificationId){
+        for (Notification notification1 : DataBase.notifications) {
+            if (notification1!=null){
+                if (notification1.getId()==notificationId){
+                    return notification1.getSenderId();
                 }
             }
         }
-        return false;
+        return 0;
     }
 }
