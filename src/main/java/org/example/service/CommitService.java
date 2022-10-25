@@ -1,11 +1,11 @@
 package org.example.service;
 
 import org.example.model.Commit;
+import org.example.model.User;
 
 import java.util.HashMap;
 
 public class CommitService extends Commit {
-
     public static HashMap<Integer, Commit> commits = new HashMap<>();
 
     public boolean add(Commit commit){
@@ -16,7 +16,7 @@ public class CommitService extends Commit {
         return false;
     }
 
-    public static boolean remove(Commit commit){
+    public boolean remove(Commit commit){
         if(commit.getId()!=0){
             commits.remove(commit.getId());
             return true;
@@ -24,8 +24,9 @@ public class CommitService extends Commit {
         return false;
     }
 
-    public void print(){
-        System.out.println(commits);
+    public void print(User user,Commit commit){
+        System.out.println("who->  "+user.getFirstName()+"\n"+"What->  "+commit.getCommit()+"\n");
+//        System.out.println(posts);
     }
 
 }

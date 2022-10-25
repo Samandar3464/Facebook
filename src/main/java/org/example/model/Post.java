@@ -10,11 +10,7 @@ import java.util.*;
 @NoArgsConstructor
 public class Post extends Base {
     private int ownerId;
-    public Object post;
+    public String post;
     private int likes;
-
-
-
-
 }
 

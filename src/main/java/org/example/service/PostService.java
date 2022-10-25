@@ -1,22 +1,19 @@
 package org.example.service;
 
 import org.example.model.Post;
+import org.example.model.User;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class PostService extends Post {
-
-    //    public static Post post = new Post();
     public static int count = 0;
-    public static HashMap<Integer, Post> posts = new HashMap<>();
+    public static HashMap<Integer, String> posts = new HashMap<>();
+
+
 
     public boolean add(Post post){
-        if(getOwnerId()!=0) {
-            posts.put(getOwnerId(), post);
-            return true;
-        }
-        return false;
+        posts.put(post.getId(), post.post);
+        return true;
     }
 
     public static boolean remove(Post post){
@@ -26,25 +23,19 @@ public class PostService extends Post {
         }
         return false;
     }
-    public boolean like(){
-        count++;
+
+    public boolean like(User user, Post post){
+        post.setLikes(++count);
         return true;
     }
 
-    public boolean dislike(){
-        count--;
+    public static boolean dislike(Post post){
+        post.setLikes(--count);
         return true;
     }
 
-//    public static HashMap<Integer,Post> posts = new HashMap<>();
-//    public static HashMap<Integer, Commit> commits = new HashMap<>();
-//    public static ArrayList<HashMap<Integer, Objects>> posts = new ArrayList<>();
-
-    public void print(){
-        System.out.println(posts);
+    public void print(User user,Post post){
+        System.out.println("who->  "+user.getFirstName()+"\n"+"What->  "+post.post+"\n"+"likes->  "+post.getLikes());
+//        System.out.println(posts);
     }
-
-
-
-
 }

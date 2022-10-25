@@ -15,11 +15,10 @@ public class DataBase {
     public static Gson gson = new Gson();
     public static BufferedWriter bufferedWriter = null;
 
-
     public static HashMap<Integer, Massege> massages = new HashMap<>();
     public static HashMap<Integer, Chat> chats = new HashMap<>();
     public static HashMap<Integer, Commit> commits = new HashMap<>();
-    public static HashMap<Integer, Post> posts = new HashMap<>();
+    public static HashMap<Integer, String> posts = new HashMap<>();
     public static Stack<Notification> notifications = new Stack<>();
     public static ArrayList<User> allUsers = new ArrayList<>();
 
