@@ -1,15 +1,18 @@
 package org.example.service;
 
+import org.example.DataBase;
 import org.example.model.Notification;
 import org.example.model.User;
 
+import java.io.IOException;
 import java.util.*;
 
 public class NotificationService {
-    Stack<Notification> notifications = new Stack<>();
+    Stack<Notification> notifications =null;
 
 
-    public void showNotificationDefaultUser(User user) {
+    public void showNotificationDefaultUser(User user) throws IOException {
+
         for (Notification notification : notifications) {
             if (notification != null) {
                 if (notification.getType().equals("request")) {
@@ -28,27 +31,6 @@ public class NotificationService {
             }
         }
     }
-
-    public User requestSandedUser(User user) {
-        UserService userService = new UserService();  // object
-        for (Notification notification : notifications) {
-            if (notification != null) {
-                if (notification.getType().equals("request")) {
-                    if (notification.getReceiverId() == user.getId()) {
-                        return userService.getById(notification.getSenderId());
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    public boolean requestConfirmation(User user, User requestSandedUser) {  // request ni tasdiqlash
-        user.getFriendsId().add(requestSandedUser.getId());
-        requestSandedUser.getFriendsId().add(user.getId());
-        return true;
-    }
-
     public boolean deleteRequest(User user) {
         for (Notification notification : notifications) {
             if (notification != null) {
