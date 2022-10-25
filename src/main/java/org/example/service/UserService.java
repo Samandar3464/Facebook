@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-    static List<User> allUsers =new ArrayList<>();
+   static List<User> allUsers =new ArrayList<>();
+
+
 
     public  boolean registration(User user){
         if(login(user.getPhoneNumber())!=null){
@@ -26,15 +28,15 @@ public class UserService {
         }return null;
     }
 
-    public int getIdByPhoneNumber(String phoneNumber){
-        for (User user : allUsers) {
-            if(user!=null){
-                if(user.getPhoneNumber().equals(phoneNumber)){
-                    return user.getId();
-                }
-            }
-        }return 0;
-    }
+  public int getIdByPhoneNumber(String phoneNumber){
+      for (User user : allUsers) {
+          if(user!=null){
+              if(user.getPhoneNumber().equals(phoneNumber)){
+                  return user.getId();
+              }
+          }
+      }return 0;
+  }
 
 
     public boolean delete(int id) {
@@ -47,10 +49,19 @@ public class UserService {
             }
         }return false;
     }
+
+
+<<<<<<<< HEAD:src/main/java/org/example/Service/UserService.java
     public User getById(int userId) {
         for (User allUser : allUsers) {
             if (allUser!=null){
                 if (allUser.getId()==userId){
+========
+    public Object getById(int id) {
+        for (User allUser : allUsers) {
+            if (allUser != null) {
+                if (allUser.getId() == id) {
+>>>>>>>> 6bbd1be (i changed service):src/main/java/org/example/service/UserService.java
                     return allUser;
                 }
             }
