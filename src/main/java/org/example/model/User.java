@@ -16,6 +16,9 @@ protected List<Integer> friendsId=new ArrayList<>(); // patpisatsa qilingan kant
 protected List<Integer> chatId=new ArrayList<>();
 protected  List<Integer > notification=new ArrayList<>();
 
+    public User() {
+    }
+
     public User(String firstName, String lastName, String phoneNumber, String password, String gender, String birthDay) {
         this.firstName = firstName;
         this.lastName = lastName;
