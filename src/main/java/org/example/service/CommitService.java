@@ -1,33 +1,17 @@
 package org.example.service;
 
-import org.example.model.Commit;
-import org.example.model.User;
+import org.example.Base;
+import org.example.DataBase;
+import org.example.model.Post;
 
-import java.util.HashMap;
-
-public class CommitService extends Commit {
-    public static HashMap<Integer, Commit> commits = new HashMap<>();
-
-    public boolean add(Commit commit){
-        if(getId()!=0) {
-            commits.put(getPostId(), commit);
+public class CommitService extends Base {
+    public  boolean add(Post post){
+            DataBase.posts.put(post.getId(),post);
             return true;
-        }
-        return false;
     }
 
-    public boolean remove(Commit commit){
-        if(commit.getId()!=0){
-            commits.remove(commit.getId());
-            return true;
-        }
-        return false;
+    public void ClickLike(Post post){
+        int i = post.getLikes() + 1;
+        post.setLikes(i);
     }
-
-    public void print(User user,Commit commit){
-        System.out.println("who->  "+user.getFirstName()+"\n"+"What->  "+commit.getCommit()+"\n");
-//        System.out.println(posts);
-    }
-
 }
-
