@@ -1,27 +1,27 @@
 package org.example.service;
 
+import org.example.DataBase;
 import org.example.model.Notification;
 import org.example.model.User;
 
 import java.io.IOException;
 import java.util.*;
 
+import static org.example.DataBase.notifications;
+
 public class NotificationService {
-    Stack<Notification> notifications = new Stack<>();
-
-
-    public void showNotificationDefaultUser(User user) {
+    public void showNotificationDefaultUser(User user) throws IOException {
         for (Notification notification : notifications) {
             if (notification != null) {
                 if (notification.getType().equals("request")) {
                     if (notification.getReceiverId() == user.getId()) {
-                        System.out.println(notification);
+                        System.out.println(notification.getNotificationMessage());
                     }
                 } else {
                     for (Integer contactId : user.getFriendsId()) {
                         if (contactId != null) {
                             if (contactId == notification.getSenderId()) {
-                                System.out.println(notification);
+                                System.out.println(notification.getNotificationMessage());
                             }
                         }
                     }
@@ -30,36 +30,28 @@ public class NotificationService {
         }
     }
 
-    public User requestSandedUser(User user) throws IOException {
-        UserService userService = new UserService();  // object
-        for (Notification notification : notifications) {
+
+
+    public Notification OneRequest(User user, int requestId ){
+        for (Notification notification : DataBase.notifications) {
             if (notification != null) {
                 if (notification.getType().equals("request")) {
-                    if (notification.getReceiverId() == user.getId()) {
-                        return userService.getById(notification.getSenderId());
+                    if (notification.getReceiverId() == user.getId()&&notification.getId()==requestId) {
+                        return notification;
                     }
                 }
             }
         }
         return null;
     }
-
-    public boolean requestConfirmation(User user, User requestSandedUser) {  // request ni tasdiqlash
-        user.getFriendsId().add(requestSandedUser.getId());
-        requestSandedUser.getFriendsId().add(user.getId());
-        return true;
-    }
-
-    public boolean deleteRequest(User user) {
-        for (Notification notification : notifications) {
-            if (notification != null) {
-                if (notification.getType().equals("request")) {
-                    if (notification.getReceiverId() == user.getId()) {
-                        return notifications.remove(notification);
-                    }
+    public Notification getNotificationById(int notificationId){
+        for (int i = 0; i < DataBase.notifications.size(); i++) {
+            if (notifications.get(i)!=null){
+                if (notifications.get(i).getId()==notificationId){
+                    return DataBase.notifications.get(i);
                 }
             }
         }
-        return false;
+        return null;
     }
 }

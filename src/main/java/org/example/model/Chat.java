@@ -1,12 +1,13 @@
 package org.example.model;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.example.Base;
+
 import java.util.ArrayList;
 import java.util.List;
 @Data
 public class Chat extends Base {
     private  int memberId1;
+    private String memberName1;
+    private String memberName2;
     private  int memberId2;
     protected List <Integer> massagesId=new ArrayList<>();
 

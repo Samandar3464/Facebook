@@ -1,1 +1,18 @@
+<<<<<<< HEAD
 null
+=======
+[
+  {
+    "firstName": "1",
+    "lastName": "1",
+    "phoneNumber": "1",
+    "password": "1",
+    "gender": "Male",
+    "birthDay": "1",
+    "friendsId": [],
+    "chatId": [],
+    "notification": [],
+    "id": 0
+  }
+]
+>>>>>>> 776fdf24fbbe6df47599916095de38ef086e6026

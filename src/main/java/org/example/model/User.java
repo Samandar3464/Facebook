@@ -1,6 +1,6 @@
 package org.example.model;
 import lombok.Data;
-import org.example.Base;
+
 import java.util.ArrayList;
 import java.util.List;
 @Data
@@ -13,7 +13,7 @@ private String userName;
 private  String gender;
 private String birthDay;
 protected List<Integer> friendsId=new ArrayList<>(); // patpisatsa qilingan kantaktlar
-protected List<Integer> chatId=new ArrayList<>();
+protected ArrayList<Integer> chatId=new ArrayList<>();
 protected  List<Integer > notification=new ArrayList<>();
 
     public User() {
@@ -29,5 +29,9 @@ protected  List<Integer > notification=new ArrayList<>();
         this.password = password;
         this.gender = gender;
         this.birthDay = birthDay;
+    }
+
+    public int getId() {
+        return 0;
     }
 }
