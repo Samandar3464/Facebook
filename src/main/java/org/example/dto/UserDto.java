@@ -1,19 +1,23 @@
 package org.example.dto;
 
 import org.example.model.User;
+import org.example.service.UserService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UserDto {
-    Scanner scanner=new Scanner(System.in);
-    Scanner scannerInt=new Scanner(System.in);
-    public User registration(){
+    static Scanner scanner=new Scanner(System.in);
+    static Scanner scannerInt=new Scanner(System.in);
+    static UserService userService=new UserService();
+
+    public static User registration(){
         System.out.println("FIRST NAME : ");
         String firstName=scanner.nextLine();
         System.out.println("LAST NAME: ");
         String lastName=scanner.nextLine();
         System.out.println("PHONE NUMBER: ");
-        String phoneNumber=scanner.nextLine();
+
         System.out.println("ENTER PASSWORD: ");
         String password=scanner.nextLine();
         System.out.println("CONFIRM: ");
@@ -36,6 +40,23 @@ public class UserDto {
             }
         }
 
-return new User(firstName,lastName,phoneNumber,password,gender,birthday);
+return new User(firstName,lastName,phoneNumber,password,confirm,gender,birthday);
+
+    }
+    public  boolean add(User user) throws IOException {
+       return userService.registration(registration());
+    }
+
+    public static boolean logIn() throws IOException {
+        System.out.println("Enter phoneNumber or your gmail: ");
+        String phoneNumber=scanner.nextLine();
+        System.out.println("Enter PASSWORD: ");
+        String password=scanner.nextLine();
+
+        User login = userService.login(phoneNumber, password);
+        if (login!=null){
+            return true;
+        }
+        return false;
     }
 }

@@ -1,26 +1,73 @@
 package org.example.service;
 
+import org.example.DataBase;
+import org.example.dto.UserDto;
 import org.example.model.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class UserService {
 
+    int number = 0;
 
 
-    public boolean registration(User user) {
-        if (login(user.getPhoneNumber()) != null) {
+    public void sendSms(String phoneNumber) {
+
+        number = (int) (Math.random() * (9999 - 999 - 1) + 999);
+        System.out.println("SmS sent to +998(**)***" + phoneNumber.substring(5) + " number! " + number);
+    }
+
+    public boolean receiveTheCode(int code) {
+        if (code == number) {
+            return true;
+        } else {
             return false;
         }
-        allUsers.add(user);
+    }
+
+    public boolean edit(int id) throws IOException {
+        User user = (User) getById(id);
+        if (user != null) {
+            if (user.getId() == id) {
+                UserDto.logIn();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean registration(User user) throws IOException {
+        for (User allUser : DataBase.allUsers) {
+            if (login(user.getPhoneNumber()) == null) {
+                return false;
+            }
+        }
+        DataBase.allUsers.add(user);
         return true;
     }
 
-    public User login(String phoneNumber) {
-        for (User user : allUsers) {
+    private User login(String phoneNumber) throws IOException {
+        if (DataBase.allUsers != null) {
+            for (User user : DataBase.allUsers) {
+                if (user != null) {
+                    if (user.getPhoneNumber().equals(phoneNumber)) {
+                        return user;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public User login(String phoneNumber, String password) throws IOException {
+
+        for (User user : DataBase.allUsers) {
             if (user != null) {
-                if (user.getPhoneNumber().equals(phoneNumber)) {
+                if (user.getPhoneNumber().equals(phoneNumber) && user.getPassword().equals(password)) {
                     return user;
                 }
             }
@@ -29,7 +76,7 @@ public class UserService {
     }
 
     public int getIdByPhoneNumber(String phoneNumber) {
-        for (User user : allUsers) {
+        for (User user : DataBase.allUsers) {
             if (user != null) {
                 if (user.getPhoneNumber().equals(phoneNumber)) {
                     return user.getId();
@@ -40,8 +87,8 @@ public class UserService {
     }
 
 
-    public User getById(int userId) {
-        for (User allUser : allUsers) {
+    public User getById(int userId) throws IOException {
+        for (User allUser : DataBase.allUsers) {
             if (allUser != null) {
                 if (allUser.getId() == userId) {
                     return allUser;

@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.model.Notification;
 import org.example.model.User;
 
+import java.io.IOException;
 import java.util.*;
 
 public class NotificationService {
@@ -29,7 +30,7 @@ public class NotificationService {
         }
     }
 
-    public User requestSandedUser(User user) {
+    public User requestSandedUser(User user) throws IOException {
         UserService userService = new UserService();  // object
         for (Notification notification : notifications) {
             if (notification != null) {
