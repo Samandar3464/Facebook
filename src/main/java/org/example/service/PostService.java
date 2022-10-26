@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class PostService extends Post {
 
-//    public static Post post = new Post();
+    //    public static Post post = new Post();
     public static int count = 0;
     public static HashMap<Integer, Post> posts = new HashMap<>();
 
