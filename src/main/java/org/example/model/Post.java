@@ -9,6 +9,5 @@ private int ownerId;
 private  Object post;
 private int likes;
 protected List<Integer> commits=new LinkedList<>();
-
 }
 

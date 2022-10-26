@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class UserService {
 
     public boolean registration(User user) {
-        //DataBase.allUsers=new ArrayList<>();
             for (User allUser : DataBase.allUsers) {
                 if (allUser != null) {
                     if (allUser.getPhoneNumber().equals(user.getPhoneNumber())) {
@@ -44,15 +43,6 @@ public class UserService {
     return null;
     }
 
-    public void showUserAccount(User user){
-        for (User allUser : DataBase.allUsers) {
-            if (allUser!=null){
-                if (allUser.equals(user)){
-                    System.out.println(user);
-                }
-            }
-        }
-    }
     public User getById(int userId) {
         for (User user : DataBase.allUsers) {
             if (user != null) {

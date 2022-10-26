@@ -29,12 +29,6 @@ public class UserDto {
         System.out.println("ENTER PASSWORD: ");
         String password = scannerStr.nextLine();
         user.setPassword(password);
-//        System.out.println("CONFIRM: ");
-//        String confirm=scannerStr.nextLine();
-//        if(!confirm.equals(password)){
-//            System.out.println("CHECK YOUR PASSWORD! ");
-//        }else System.out.println("SUCCESSFULLY! ");
-
         System.out.println("ENTER YOUR BIRTHDAY: ");
         String birthday = scannerStr.nextLine();
         user.setBirthDay(birthday);
@@ -50,13 +44,11 @@ public class UserDto {
             }
         }
         user.setGender(gender);
-        if (userService.registration(user))
-            return user;
-        return null;
+        return user;
     }
 
     public boolean uptoDateAccountFront(User user) {
-        userService.showUserAccount(user);
+        System.out.println(user);
         System.out.println("What do you want to change ?");
         int a = 10;
         while (a != 0) {
@@ -109,26 +101,7 @@ public class UserDto {
         return userService.logIn(phone, password);
     }
 
-    public void notification(User user) throws IOException {
-        int var = 10;
-        while (var != 0) {
-            System.out.println("1. Your all notifications");
-            notificationService.showNotificationDefaultUser(user);
-            System.out.println("\n" + "Enter requestId for acceptance or delete");
-            int requestId = scannerInt.nextInt();
-            System.out.println(notificationService.OneRequest(user, requestId));
-            System.out.println("For acceptance request enter 'y' , for rejection enter 'n' ");
-            String s = scannerStr.nextLine();
-            if (s.equals('y')) {
-                user.getFriendsId().add(notificationService.getById(requestId));
-                userService.getById(notificationService.getById(requestId)).getFriendsId().add(user.getId());
-            } else if (s.equals('n')) {
-                System.out.println(notificationService.deleteRequest(user, requestId));
-            } else {
-                System.out.println("Please enter only (y or n)");
-            }
-        }
-    }
+
 
     public  void chatFront(User user){
         int var=10;
