@@ -37,7 +37,15 @@ public class ChatService {
     }
 
 
-
+    public boolean isExitChat(int id, int id1) {
+        for (Map.Entry<Integer, Chat> integerChatEntry : DataBase.chats.entrySet()) {
+            if (integerChatEntry.getValue().getMemberId1()==id&&integerChatEntry.getValue().getMemberId2()==id1||
+                    integerChatEntry.getValue().getMemberId1()==id1&&integerChatEntry.getValue().getMemberId2()==id){
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 

@@ -5,11 +5,14 @@ import org.example.model.Notification;
 import org.example.model.User;
 
 import java.io.IOException;
-import java.util.*;
 
 import static org.example.DataBase.notifications;
 
 public class NotificationService {
+    public static void addNotification(Notification requestnotification) {
+        DataBase.notifications.add(requestnotification);
+    }
+
     public void showNotificationDefaultUser(User user) throws IOException {
         for (Notification notification : notifications) {
             if (notification != null) {

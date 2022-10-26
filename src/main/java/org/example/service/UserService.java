@@ -154,4 +154,11 @@ public class UserService {
         }
     }
 
+    public User getByUserName(String userName) {
+        for (User allUser : DataBase.allUsers) {
+            if (allUser.getUserName().equals(userName)) return allUser;
+        }
+        return null;
+    }
 }
+
