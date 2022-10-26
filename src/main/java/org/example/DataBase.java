@@ -23,6 +23,7 @@ public class DataBase {
     public static HashMap<Integer, Post> posts = new HashMap<>();
     public static Stack<Notification> notifications = new Stack<>();
     public static ArrayList<User> allUsers = new ArrayList<>();
+    public static ArrayList<Commit> AllCommits = new ArrayList<>();
 
 
     public static void start() throws IOException {

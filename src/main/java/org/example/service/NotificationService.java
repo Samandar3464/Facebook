@@ -13,13 +13,13 @@ public class NotificationService {
             if (notification != null) {
                 if (notification.getType().equals("request")) {
                     if (notification.getReceiverId() == user.getId()) {
-                        System.out.println(notification);
+                        System.out.println(notification.getNotificationMessage());
                     }
                 } else {
                     for (Integer contactId : user.getFriendsId()) {
                         if (contactId != null) {
                             if (contactId == notification.getSenderId()) {
-                                System.out.println(notification);
+                                System.out.println(notification.getNotificationMessage());
                             }
                         }
                     }
@@ -27,18 +27,7 @@ public class NotificationService {
             }
         }
     }
-    public boolean deleteRequest(User user ,int requestId) {
-        for (Notification notification : DataBase.notifications) {
-            if (notification != null) {
-                if (notification.getType().equals("request")) {
-                    if (notification.getReceiverId() == user.getId()&&notification.getId()==requestId) {
-                        return DataBase.notifications.remove(notification);
-                    }
-                }
-            }
-        }
-        return false;
-    }
+
     public Notification OneRequest(User user ,int requestId) {
         for (Notification notification : DataBase.notifications) {
             if (notification != null) {
@@ -51,14 +40,14 @@ public class NotificationService {
         }
         return null;
     }
-    public int getById(int notificationId){
-        for (Notification notification1 : DataBase.notifications) {
-            if (notification1!=null){
-                if (notification1.getId()==notificationId){
-                    return notification1.getSenderId();
+    public Notification getNotificationById(int notificationId){
+        for (int i = 0; i < DataBase.notifications.size(); i++) {
+            if (DataBase.notifications.get(i)!=null){
+                if (DataBase.notifications.get(i).getId()==notificationId){
+                    return DataBase.notifications.get(i);
                 }
             }
         }
-        return 0;
+        return null;
     }
 }

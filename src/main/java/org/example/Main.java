@@ -1,7 +1,11 @@
 package org.example;
 
+import org.example.dto.NotificationDto;
 import org.example.dto.UserDto;
+import org.example.model.Notification;
 import org.example.model.User;
+import org.example.service.NotificationService;
+import org.example.service.UserService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +15,10 @@ public class Main {
     static Scanner scannerStr = new Scanner(System.in);
     static Scanner scannerInt = new Scanner(System.in);
     static UserDto userDto = new UserDto();
+    static NotificationDto notificationDto = new NotificationDto();
+    static NotificationService notificationService = new NotificationService();
     static User user;
+    public static UserService userService = new UserService();
 
     public static void main(String[] args) throws IOException {
         DataBase.start();
@@ -21,12 +28,10 @@ public class Main {
             mainCase = scannerInt.nextInt();
             switch (mainCase) {
                 case 1 -> {
-                    User user = userDto.registrationFront();
-                      if (user != null) {
+                    user = userDto.registrationFront();
+                    if (userService.registration(user))
                         System.out.println("Successfully");
-                    } else {
-                        System.out.println("This phone already have in Facebook");
-                    }
+                    else System.out.println("This phone already have in Facebook or This user name already havel");
                 }
                 case 2 -> {
                     user = userDto.logInFront();
@@ -61,7 +66,25 @@ public class Main {
 
                 }
                 case 3 -> {
-                    userDto.notification(user);
+                    notificationDto.notification(user);
+                    System.out.println("\n" + "Enter requestId for acceptance or delete");
+                    int requestId = scannerInt.nextInt();
+                    Notification notification=notificationService.getNotificationById(requestId);
+                    if (notification.getType().equals("request")) {
+                        System.out.println(notification.getNotificationMessage());
+                        System.out.println("For acceptance request enter 'y' , for rejection enter 'n' ");
+                        String s = scannerStr.nextLine();
+                        if (s.equals('y')) {
+                            user.getFriendsId().add(notification.getSenderId());
+                            userService.getById(notification.getSenderId()).getFriendsId().add(user.getId());
+                        } else if (s.equals('n')) {
+                            notification.setActive(false);
+                        } else {
+                            System.out.println("Please enter only (y or n)");
+                        }
+                    } else if (notification.getType().equals("post")) {
+                        System.out.println(notification.getNotificationMessage());
+                    }
                 }
                 case 4 -> {
 

@@ -9,11 +9,9 @@ import java.util.ArrayList;
 public class UserService {
 
     public boolean registration(User user) {
-
             for (User allUser : DataBase.allUsers) {
                 if (allUser != null) {
-                    if (allUser.getPhoneNumber().equals(user.getPhoneNumber())) {
-
+                    if (allUser.getPhoneNumber().equals(user.getPhoneNumber())||allUser.getUserName().equals(user.getUserName())) {
                         return false;
                     }
                 }
@@ -45,15 +43,6 @@ public class UserService {
     return null;
     }
 
-    public void showUserAccount(User user){
-        for (User allUser : DataBase.allUsers) {
-            if (allUser!=null){
-                if (allUser.equals(user)){
-                    System.out.println(user);
-                }
-            }
-        }
-    }
     public User getById(int userId) {
         for (User user : DataBase.allUsers) {
             if (user != null) {

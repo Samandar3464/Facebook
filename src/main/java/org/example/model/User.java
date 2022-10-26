@@ -1,5 +1,7 @@
 package org.example.model;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.example.Base;
 
 import java.text.SimpleDateFormat;
@@ -7,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-@Data
+@Getter
+@Setter
 public class User extends Base {
 private String firstName;
 private String lastName;
@@ -30,5 +33,18 @@ protected ArrayList<Integer> chatId=new ArrayList<>();
         this.password = password;
         this.gender = gender;
         this.birthDay = birthDay;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", userName='" + userName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthDay='" + birthDay + '\'' +
+                '}';
     }
 }
