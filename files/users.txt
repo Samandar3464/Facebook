@@ -1,14 +1,26 @@
 [
   {
-    "firstName": "1",
-    "lastName": "1",
-    "phoneNumber": "1",
-    "password": "1",
+    "firstName": "Asrorbek",
+    "lastName": "Obidjonov",
+    "phoneNumber": "908353204",
+    "password": "12",
     "gender": "Male",
-    "birthDay": "1",
+    "birthDay": "7",
     "friendsId": [],
     "chatId": [],
     "notification": [],
     "id": 0
+  },
+  {
+    "firstName": "Asror",
+    "lastName": "asd",
+    "phoneNumber": "234567",
+    "password": "23",
+    "gender": "Male",
+    "birthDay": "23",
+    "friendsId": [],
+    "chatId": [],
+    "notification": [],
+    "id": 1
   }
 ]

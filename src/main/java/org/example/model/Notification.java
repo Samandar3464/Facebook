@@ -17,7 +17,6 @@ public class Notification extends Base {
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.notificationMessage=notificationMessage;
-        this.isActive=true;
     }
 
     public Notification(int senderId, int postId, String type,String notificationMessage) { // post
@@ -25,6 +24,5 @@ public class Notification extends Base {
         this.postId = postId;
         this.senderId = senderId;
         this.notificationMessage=notificationMessage;
-        this.isActive=true;
     }
 }
