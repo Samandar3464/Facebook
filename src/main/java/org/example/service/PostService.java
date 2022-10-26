@@ -1,50 +1,28 @@
 package org.example.service;
 
+import org.example.Base;
+import org.example.DataBase;
 import org.example.model.Post;
 
-import java.util.HashMap;
-import java.util.Objects;
-
-public class PostService extends Post {
-
-    //    public static Post post = new Post();
-    public static int count = 0;
-    public static HashMap<Integer, Post> posts = new HashMap<>();
-
-    public boolean add(Post post){
-        if(getOwnerId()!=0) {
-            posts.put(getOwnerId(), post);
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean remove(Post post){
-        if(post.getId()!=0){
-            posts.remove(post.getId());
-            return true;
-        }
-        return false;
-    }
-    public boolean like(){
-        count++;
+public class PostService extends Base {
+    public boolean add(Post post) {
+        DataBase.posts.put(post.getId(), post);
         return true;
     }
 
-    public boolean dislike(){
-        count--;
+    public void showAllPostsCurrentUser(int userId) {
+        for (Integer integer : DataBase.posts.keySet()) {
+            if (DataBase.posts.get(integer).getOwnerId() == userId && DataBase.posts.get(integer).isActive()) {
+                System.out.println(DataBase.posts.get(integer));
+            }
+        }
+    }
+
+    public boolean deletePost(int postId) {
+        DataBase.posts.get(postId).setActive(false);
         return true;
     }
-
-//    public static HashMap<Integer,Post> posts = new HashMap<>();
-//    public static HashMap<Integer, Commit> commits = new HashMap<>();
-//    public static ArrayList<HashMap<Integer, Objects>> posts = new ArrayList<>();
-
-    public void print(){
-        System.out.println(posts);
-    }
-
-
-
-
 }
+
+
+

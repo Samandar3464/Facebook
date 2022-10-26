@@ -9,8 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-public class MessageService {
+public  class MessageService {
 
     public boolean addMessage(Massege massege) throws IOException {
         DataBase.massages.put(massege.getId(), massege);
@@ -18,8 +17,8 @@ public class MessageService {
     }
 
     public boolean deleteMessage(int messageId, int userid) throws IOException {
-        if (DataBase.massages.get(messageId) != null && DataBase.massages.get(messageId).getSenderId() == userid) {
-            DataBase.massages.remove(messageId);
+        if (DataBase.massages.get(messageId)!=null&&DataBase.massages.get(messageId).getSenderId()==userid){
+            DataBase.massages.get(messageId).setActive(false);
             return true;
         }
             return false;
@@ -28,8 +27,9 @@ public class MessageService {
         public void showAllMessages ( int chatId){
             if (DataBase.massages == null) return;
             for (Integer integer : DataBase.massages.keySet()) {
-                if (DataBase.massages.get(integer).getReceiverId() == chatId) {
-                    System.out.println(DataBase.massages.get(integer).getSenderName() + ":  " + DataBase.massages.get(integer).getMassage());
+                if (DataBase.massages.get(integer).isActive()&&
+                        DataBase.massages.get(integer).getReceiverId() == chatId) {
+                    System.out.println(integer+" "+DataBase.massages.get(integer).getSenderName() + ":  " + DataBase.massages.get(integer).getMassage());
                 }
             }
         }
