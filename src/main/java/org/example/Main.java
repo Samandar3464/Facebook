@@ -20,7 +20,7 @@ public class Main {
             switch (mainCase) {
                 case 1 -> {
                     User user = userDto.registrationFront();
-                    if (user != null) {
+                      if (user != null) {
                         System.out.println("Successfully");
                     } else {
                         System.out.println("This phone already have in Facebook");
