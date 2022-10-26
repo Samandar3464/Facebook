@@ -1,6 +1,7 @@
 package org.example;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.example.model.*;
 
@@ -12,11 +13,11 @@ import java.util.List;
 import java.util.Stack;
 
 public class DataBase {
-    public static Gson gson = new Gson();
+    public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static BufferedWriter bufferedWriter = null;
 
 
-    public static HashMap<Integer, Massege> massages = new HashMap<>();
+    public static HashMap<Integer, Massege> massages = null;
     public static HashMap<Integer, Chat> chats = new HashMap<>();
     public static HashMap<Integer, Commit> commits = new HashMap<>();
     public static HashMap<Integer, Post> posts = new HashMap<>();
@@ -33,6 +34,9 @@ public class DataBase {
         massages = gson.fromJson(messageFileReader, new TypeToken<HashMap<Integer, Massege>>() {
         }.getType());
         messageFileReader.close();
+        if (massages == null) {
+            massages = new HashMap<Integer, Massege>();
+        }
 
 //        USER
         File user = new File("files\\users.txt");
@@ -41,6 +45,9 @@ public class DataBase {
         allUsers = gson.fromJson(userFileReader, new TypeToken<ArrayList<User>>() {
         }.getType());
         messageFileReader.close();
+        if (allUsers == null) {
+            allUsers = new ArrayList<>();
+        }
 
 
 //        CHAT
@@ -50,7 +57,9 @@ public class DataBase {
         chats = gson.fromJson(charFileReader, new TypeToken<HashMap<Integer, Chat>>() {
         }.getType());
         charFileReader.close();
-
+        if (chats == null) {
+            chats = new HashMap<>();
+        }
 //        COMMIT
         File commit = new File("files\\commits.txt");
         commit.createNewFile();
@@ -58,7 +67,9 @@ public class DataBase {
         commits = gson.fromJson(commitFileReader, new TypeToken<HashMap<Integer, Commit>>() {
         }.getType());
         commitFileReader.close();
-
+        if (commits == null) {
+            commits = new HashMap<>();
+        }
 //        NOTIFICATION
         File notification = new File("files\\notifications.txt");
         notification.createNewFile();
@@ -66,7 +77,9 @@ public class DataBase {
         notifications = gson.fromJson(notificationFileReader, new TypeToken<Stack<Notification>>() {
         }.getType());
         notificationFileReader.close();
-
+        if (notifications == null) {
+            notifications = new Stack<>();
+        }
 //        POST
         File post = new File("files\\posts.txt");
         post.createNewFile();
@@ -74,6 +87,9 @@ public class DataBase {
         posts = gson.fromJson(postFileReader, new TypeToken<HashMap<Integer, Post>>() {
         }.getType());
         postFileReader.close();
+        if (posts == null) {
+            posts = new HashMap<>();
+        }
     }
 
     public static void save() throws IOException {

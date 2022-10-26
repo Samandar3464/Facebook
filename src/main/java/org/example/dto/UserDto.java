@@ -1,6 +1,7 @@
 package org.example.dto;
 
 import org.example.model.User;
+import org.example.service.ChatService;
 import org.example.service.NotificationService;
 import org.example.service.UserService;
 
@@ -11,6 +12,7 @@ public class UserDto {
     Scanner scannerStr = new Scanner(System.in);
     Scanner scannerInt = new Scanner(System.in);
     UserService userService = new UserService();
+    ChatService chatService =new ChatService();
     NotificationService notificationService = new NotificationService();
 
     public User registrationFront() {
@@ -58,7 +60,7 @@ public class UserDto {
         System.out.println("What do you want to change ?");
         int a = 10;
         while (a != 0) {
-            System.out.println("1.FirstName 2.LastName 3. Password  4.Birthday 5.Gender ");
+            System.out.println("1.FirstName 2.LastName 3. Password  4.Birthday 5.Gender 0.back");
             a = scannerInt.nextInt();
             switch (a) {
                 case 1 -> {
@@ -124,6 +126,27 @@ public class UserDto {
                 System.out.println(notificationService.deleteRequest(user, requestId));
             } else {
                 System.out.println("Please enter only (y or n)");
+            }
+        }
+    }
+
+    public  void chatFront(User user){
+        int var=10;
+        while (var!=0){
+            chatService.showChats(user.getChatId(), user.getId());
+            System.out.println("\n"+" 1.Add chat 2.Chat with one contact 3. Delete chat");
+           var=scannerInt.nextInt();
+            switch (var){
+            case 1->{
+                userService.showFriends(user);
+
+            }
+            case 2->{
+                System.out.println();
+              //  chatService.getChatById(user.getChatId())
+            }
+            case 3->{}
+            case 0->{}
             }
         }
     }

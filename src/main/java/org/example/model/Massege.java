@@ -11,4 +11,5 @@ public class Massege extends Base {
     private String massage;
     private  String receiverName;
 
+
 }

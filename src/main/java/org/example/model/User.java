@@ -13,7 +13,7 @@ private String userName;
 private  String gender;
 private String birthDay;
 protected List<Integer> friendsId=new ArrayList<>(); // patpisatsa qilingan kantaktlar
-protected List<Integer> chatId=new ArrayList<>();
+protected ArrayList<Integer> chatId=new ArrayList<>();
 protected  List<Integer > notification=new ArrayList<>();
 
     public User() {
