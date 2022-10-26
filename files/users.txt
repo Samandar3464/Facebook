@@ -8,7 +8,19 @@
     "birthDay": "1",
     "friendsId": [],
     "chatId": [],
-    "notification": [],
-    "id": 0
+    "id": 0,
+    "date": "Oct 26, 2022, 3:38:24 PM"
+  },
+  {
+    "firstName": "2",
+    "lastName": "2",
+    "phoneNumber": "2",
+    "password": "2",
+    "gender": "Male",
+    "birthDay": "2",
+    "friendsId": [],
+    "chatId": [],
+    "id": 2,
+    "date": "Oct 26, 2022, 4:29:57 PM"
   }
 ]
