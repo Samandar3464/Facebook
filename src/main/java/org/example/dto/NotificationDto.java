@@ -13,7 +13,8 @@ public class NotificationDto {
     Scanner scannerStr = new Scanner(System.in);
 
     public  Notification createRequestnotification(User currentUser, User user) {
-        return new Notification("request",currentUser.getId(),user.getId(),currentUser.getFirstName()+" sizga do'stlik so'rovini yubordi");
+        return new Notification("request",currentUser.getId(),user.getId(),
+                currentUser.getFirstName()+" sizga do'stlik so'rovini yubordi");
     }
 
     public void notification(User user) throws IOException {

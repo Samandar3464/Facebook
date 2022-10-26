@@ -91,7 +91,16 @@ public class Main {
                     }
                 }
                 case 4 -> {
+                    if (currentUser.getChatId().isEmpty()) System.out.println("Chat bo'sh");
+                    else {
+                        chatService.showChats(currentUser.getChatId(), currentUser.getId());
+                        int varChat = 10;
+                        while (varChat != 0) {
+                            System.out.println("ChatId kiriting \n 0-> ortga");
+                            varChat=scannerInt.nextInt();
 
+                        }
+                    }
                 }
                 case 5 ->{
                     System.out.println("userName kiriting");
@@ -99,22 +108,31 @@ public class Main {
                     User user = userService.getByUserName(userName);
                     if (user!=null){
                         System.out.println(user.getUserName()+" is founded");
-                        System.out.println("1-> add Friend 2-> send message");
-                        int n=scannerInt.nextInt();
-                        if (n==1) {
-                            Notification requestnotification = notificationDto.createRequestnotification(currentUser, user);
-                            NotificationService.addNotification(requestnotification);
-                        }
-                        else if (n==2) {
-                            if(chatService.isExitChat(currentUser.getId(),user.getId())){
-
+                        int varSearch=10;
+                        while (varSearch!=0){
+                            System.out.println("1-> add Friend 2-> send message 0 -ortga");
+                            varSearch=scannerInt.nextInt();
+                            if (varSearch==1) {
+                                if (currentUser.getFriendsId().indexOf(user.getId())!=-1) {
+                                    Notification requestnotification = notificationDto.createRequestnotification(currentUser, user);
+                                    NotificationService.addNotification(requestnotification);
+                                    System.out.println("So'rov yuborildi");
+                                }else System.out.println("Sizlar do'stsiz");
                             }
-                            System.out.println("Message matnini kiriting. Chiqish uchun 0 ni bosing");
-                            MessageDto.createMessage(currentUser, user);
+                            else if (varSearch==2) {
+                                if(chatService.isExitChat(currentUser.getId(),user.getId())){
+
+                                }
+                                System.out.println("Message matnini kiriting. Chiqish uchun 0 ni bosing");
+                                MessageDto.createMessage(currentUser, user);
+                            }
                         }
+
                     } else System.out.println("Nothing founded");
                 }
                 case 0 -> {
+
+
 
                 }
             }
