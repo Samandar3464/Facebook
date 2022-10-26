@@ -23,6 +23,9 @@ public class UserDto {
         System.out.println("LAST NAME: ");
         String lastName = scannerStr.nextLine();
         user.setLastName(lastName);
+        System.out.println("USER NAME: ");
+        String userName = scannerStr.nextLine();
+        user.setUserName(userName);
         System.out.println("PHONE NUMBER: ");
         String phoneNumber = scannerStr.nextLine();
         user.setPhoneNumber(phoneNumber);

@@ -35,7 +35,7 @@ public class DataBase {
         }.getType());
         messageFileReader.close();
         if (massages == null) {
-            massages = new HashMap<Integer, Massege>();
+            massages = new HashMap<>();
         }
 
 //        USER

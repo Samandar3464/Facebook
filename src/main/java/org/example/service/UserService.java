@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.DataBase;
 import org.example.model.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class UserService {
@@ -10,8 +11,7 @@ public class UserService {
     public boolean registration(User user) {
             for (User allUser : DataBase.allUsers) {
                 if (allUser != null) {
-                    if (allUser.getPhoneNumber().equals(user.getPhoneNumber())) {
-                       // DataBase.allUsers.add(user);
+                    if (allUser.getPhoneNumber().equals(user.getPhoneNumber())||allUser.getUserName().equals(user.getUserName())) {
                         return false;
                     }
                 }

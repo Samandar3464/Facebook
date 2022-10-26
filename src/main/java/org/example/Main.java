@@ -35,7 +35,7 @@ public class Main {
                     user = userDto.registrationFront();
                     if (userService.registration(user))
                         System.out.println("Successfully");
-                    else System.out.println("This phone already have in Facebook");
+                    else System.out.println("This phone already have in Facebook or This user name already havel");
                 }
                 case 2 -> {
                     user = userDto.logInFront();

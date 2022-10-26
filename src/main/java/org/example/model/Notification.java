@@ -9,7 +9,6 @@ public class Notification extends Base {
     private int senderId;
     private int receiverId;
     private int postId;
-    private boolean isActive;
     private String notificationMessage;
 
     public Notification(String type, int senderId, int receiverId,String notificationMessage) {  // request
