@@ -1,106 +1,62 @@
 package org.example.dto;
 
-import org.example.DataBase;
 import org.example.model.User;
-import org.example.service.ChatService;
-import org.example.service.NotificationService;
 import org.example.service.UserService;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class UserDto {
-    Scanner scannerStr = new Scanner(System.in);
-    Scanner scannerInt = new Scanner(System.in);
-    UserService userService = new UserService();
-    ChatService chatService =new ChatService();
-    NotificationService notificationService = new NotificationService();
+    static Scanner scanner=new Scanner(System.in);
+    static Scanner scannerInt=new Scanner(System.in);
+    static UserService userService=new UserService();
 
-    public User registrationFront() {
-        User user = new User();
+    public static User registration(){
         System.out.println("FIRST NAME : ");
-        String firstName = scannerStr.nextLine();
-        user.setFirstName(firstName);
+        String firstName=scanner.nextLine();
         System.out.println("LAST NAME: ");
-        String lastName = scannerStr.nextLine();
-        user.setLastName(lastName);
+        String lastName=scanner.nextLine();
         System.out.println("PHONE NUMBER: ");
-        String phoneNumber = scannerStr.nextLine();
-        user.setPhoneNumber(phoneNumber);
+
         System.out.println("ENTER PASSWORD: ");
-        String password = scannerStr.nextLine();
-        user.setPassword(password);
+        String password=scanner.nextLine();
+        System.out.println("CONFIRM: ");
+        String confirm=scanner.nextLine();
+        if(!confirm.equals(password)){
+            System.out.println("CHECK YOUR PASSWORD! ");
+        }else System.out.println("SUCCESSFULLY! ");
+
         System.out.println("ENTER YOUR BIRTHDAY: ");
-        String birthday = scannerStr.nextLine();
-        user.setBirthDay(birthday);
+        String birthday=scanner.nextLine();
         System.out.println("GENDER: 1.MALE  2.FEMALE ");
-        int choseGender = scannerInt.nextInt();
-        String gender = "";
-        switch (choseGender) {
-            case 1 -> {
-                gender = "Male";
+        int choseGender=scannerInt.nextInt();
+        String gender="";
+        switch (choseGender){
+            case 1->{
+                gender="Male";
             }
-            case 2 -> {
-                gender = "Female";
-            }
-        }
-        user.setGender(gender);
-        return user;
-    }
-
-    public boolean uptoDateAccountFront(User user) throws IOException {
-        System.out.println(user);
-        System.out.println("What do you want to change ?");
-        int a = 10;
-        while (a != 0) {
-            System.out.println("1.FirstName 2.LastName 3. Password  4.Birthday 5.Gender 0.back");
-            a = scannerInt.nextInt();
-            switch (a) {
-                case 1 -> {
-                    System.out.println("enter new FirstName");
-                    user.setFirstName(scannerStr.nextLine());
-                }
-                case 2 -> {
-                    System.out.println("enter new LastName");
-                    user.setLastName(scannerStr.nextLine());
-                }
-                case 3 -> {
-                    System.out.println("enter new password");
-                    user.setFirstName(scannerStr.nextLine());
-                }
-                case 4 -> {
-                    System.out.println("enter new birthday");
-                    user.setFirstName(scannerStr.nextLine());
-                }
-                case 5 -> {
-                    System.out.println("GENDER: 1.MALE  2.FEMALE ");
-                    int choseGender = scannerInt.nextInt();
-                    String gender = "";
-                    switch (choseGender) {
-                        case 1 -> {
-                            gender = "Male";
-                        }
-                        case 2 -> {
-                            gender = "Female";
-                        }
-                    }
-                    user.setGender(gender);
-
-                }
-                case 0 -> {
-                    DataBase.save();
-                }
+            case 2->{
+                gender="Female";
             }
         }
-        return true;
+
+return new User(firstName,lastName,phoneNumber,password,confirm,gender,birthday);
+
+    }
+    public  boolean add(User user) throws IOException {
+       return userService.registration(registration());
     }
 
-    public User logInFront() {
-        System.out.println("Enter phoneNumber ");
-        String phone = scannerStr.nextLine();
-        System.out.println("Enter password ");
-        String password = scannerStr.nextLine();
-        return userService.logIn(phone, password);
-    }
+    public static boolean logIn() throws IOException {
+        System.out.println("Enter phoneNumber or your gmail: ");
+        String phoneNumber=scanner.nextLine();
+        System.out.println("Enter PASSWORD: ");
+        String password=scanner.nextLine();
 
+        User login = userService.login(phoneNumber, password);
+        if (login!=null){
+            return true;
+        }
+        return false;
+    }
 }

@@ -23,6 +23,9 @@ protected ArrayList<Integer> chatId=new ArrayList<>();
 
     }
 
+    public User(String firstName, String lastName, String phoneNumber, String password, String confirm, String gender, String birthday) {
+    }
+
     public User(String firstName, String lastName, String phoneNumber, String password, String gender, String birthDay) {
         this.firstName = firstName;
         this.lastName = lastName;
