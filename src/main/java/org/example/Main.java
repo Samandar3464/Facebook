@@ -1,30 +1,40 @@
 package org.example;
 
-import org.example.dto.MessageDto;
-import org.example.dto.NotificationDto;
-import org.example.dto.UserDto;
-import org.example.model.Massege;
-import org.example.model.Notification;
-import org.example.model.User;
-import org.example.service.ChatService;
-import org.example.service.MessageService;
-import org.example.service.NotificationService;
-import org.example.service.UserService;
+import org.example.dto.*;
+import org.example.model.*;
+import org.example.service.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scannerStr = new Scanner(System.in);
     static Scanner scannerInt = new Scanner(System.in);
+    static User user;
+
+
+//    DTO
     static UserDto userDto = new UserDto();
     static NotificationDto notificationDto = new NotificationDto();
-    static NotificationService notificationService = new NotificationService();
-    static User user;
-    public static UserService userService = new UserService();
+    static MessageDto messageDto = new MessageDto();
+    static ChatDto chatDto = new ChatDto();
+    static CommitDto commitDto = new CommitDto();
+    static PostDto postDto = new PostDto();
+
+
+
+
+//    SERVICES
+    static UserService userService = new UserService();
     static ChatService chatService = new ChatService();
+    static MessageService messageService = new MessageService();
+    static CommitService commitService = new CommitService();
+    static NotificationService notificationService = new NotificationService();
+    static PostService postService = new PostService();
 
     public static void main(String[] args) throws IOException {
+        ArrayList arrayList=new ArrayList();
         DataBase.start();
         int mainCase = 10;
         while (mainCase != 0) {
@@ -70,24 +80,34 @@ public class Main {
 
                 }
                 case 3 -> {
-                    notificationDto.notification(Main.user);
-                    System.out.println("\n" + "Enter requestId for acceptance or delete");
-                    int requestId = scannerInt.nextInt();
-                    Notification notification=notificationService.getNotificationById(requestId);
-                    if (notification.getType().equals("request")) {
-                        System.out.println(notification.getNotificationMessage());
-                        System.out.println("For acceptance request enter 'y' , for rejection enter 'n' ");
-                        String s = scannerStr.nextLine();
-                        if (s.equals('y')) {
-                            Main.user.getFriendsId().add(notification.getSenderId());
-                            userService.getById(notification.getSenderId()).getFriendsId().add(Main.user.getId());
-                        } else if (s.equals('n')) {
-                            notification.setActive(false);
-                        } else {
-                            System.out.println("Please enter only (y or n)");
-                        }
-                    } else if (notification.getType().equals("post")) {
-                        System.out.println(notification.getNotificationMessage());
+                    int varNotion=10;
+                    while (varNotion!=0) {
+                        notificationDto.notification(currentUser);
+                        System.out.println("0-> ortga");
+                        int requestId = scannerInt.nextInt();
+                        if (requestId!=0) {
+                            Notification notification = notificationService.getNotificationById(requestId);
+                            if (notification!=null&&notification.getType().equals("request")) {
+                                String s="";
+                                while (!s.equals("y")&&!s.equals("n")) {
+                                    System.out.println(notification.getNotificationMessage());
+                                    System.out.println("For acceptance request enter 'y' , for rejection enter 'n' ");
+                                    s = scannerStr.nextLine();
+                                    if (s.equals('y')) {
+                                        Main.user.getFriendsId().add(notification.getSenderId());
+                                        userService.getById(notification.getSenderId()).getFriendsId().add(currentUser.getId());
+                                        notification.setActive(false);
+                                    } else if (s.equals('n')) {
+                                        notification.setActive(false);
+                                    } else {
+                                        System.out.println("Please enter only (y or n)");
+                                    }
+                                }
+                            }
+                            else if (notification.getType().equals("post")) {
+                                System.out.println(notification.getNotificationMessage());
+                            }
+                        }else varNotion=0;
                     }
                 }
                 case 4 -> {
@@ -98,6 +118,10 @@ public class Main {
                         while (varChat != 0) {
                             System.out.println("ChatId kiriting \n 0-> ortga");
                             varChat=scannerInt.nextInt();
+                            if (varChat!=0){
+                                Chat chat = chatService.getChatById(varChat);
+                                if (chat!=null)chatView(chat,currentUser);
+                            }
 
                         }
                     }
@@ -113,18 +137,23 @@ public class Main {
                             System.out.println("1-> add Friend 2-> send message 0 -ortga");
                             varSearch=scannerInt.nextInt();
                             if (varSearch==1) {
-                                if (currentUser.getFriendsId().indexOf(user.getId())!=-1) {
+                                if (!currentUser.getFriendsId().contains(user.getId())) {
                                     Notification requestnotification = notificationDto.createRequestnotification(currentUser, user);
                                     NotificationService.addNotification(requestnotification);
                                     System.out.println("So'rov yuborildi");
                                 }else System.out.println("Sizlar do'stsiz");
                             }
                             else if (varSearch==2) {
-                                if(chatService.isExitChat(currentUser.getId(),user.getId())){
-
+                                Chat exitChat = chatService.isExitChat(currentUser.getId(), user.getId());
+                                if(exitChat!=null){
+                                  chatView(exitChat,currentUser);
+                                }else {
+                                    Chat chat=new Chat(currentUser.getId(),currentUser.getFirstName(),user.getId(),user.getFirstName());
+                                    chatService.addChat(chat);
+                                    currentUser.getChatId().add(chat.getId());
+                                    user.getChatId().add(chat.getId());
+                                    chatView(chat,currentUser);
                                 }
-                                System.out.println("Message matnini kiriting. Chiqish uchun 0 ni bosing");
-                                MessageDto.createMessage(currentUser, user);
                             }
                         }
 
@@ -137,5 +166,28 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static void chatView(Chat chat, User currentUser) throws IOException {
+       messageService.showAllMessages(chat.getId());
+        int varChatView=10;
+        while (varChatView!=0) {
+            System.out.println("1-> xabarni o'chirish 2-> xabar yuborish 0-> ortga");
+            varChatView=scannerInt.nextInt();
+            if (varChatView==1){
+                System.out.println("id ni kiriting");
+                varChatView= scannerInt.nextInt();
+                if (messageService.deleteMessage(varChatView,currentUser.getId())) System.out.println("o'chirildi");
+                else System.out.println("o'chirilmadi");
+            } else if (varChatView==2){
+                System.out.println("0-> back");
+                Massege massege=messageDto.createMessage(chat.getId(),currentUser.getId(),currentUser.getFirstName());
+                while (massege!=null) {
+                    messageService.addMessage(massege);
+                   massege = messageDto.createMessage(chat.getId(), currentUser.getId(), currentUser.getFirstName());
+                }
+            }
+        }
+
     }
 }
