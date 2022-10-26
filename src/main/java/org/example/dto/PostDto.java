@@ -15,4 +15,9 @@ public class PostDto {
         post.setOwnerId(userId);
         return post;
     }
+   public int deletePost(){
+       System.out.println("enter post id for delete ");
+       int postId= scanner.nextInt();
+       return postId;
+   }
 }

@@ -10,5 +10,8 @@ public class CommitService extends Base {
             return true;
     }
 
-
+    public void ClickLike(Post post){
+        int i = post.getLikes() + 1;
+        post.setLikes(i);
+    }
 }
