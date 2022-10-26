@@ -36,24 +36,10 @@ public class Main {
                     System.out.println("Phone number have to be 9 digit ! Please try again.");
                     continue;
                 }
-                if()
+
 
             }
-            switch (choose){
-                case 1->{
-                    User user= UserDto.registration();
-                    UserDto userDto =new UserDto();
-                    System.out.println(userDto.add(user));
-                    userService.registration(user);
-                    System.out.println(user);
-                    userService.sendSms(user.getPhoneNumber());
-                    //userService.receiveTheCode()
-                }
-                case 2->{
-
-                    UserDto.logIn();
-                }
-            }
+            //userService.receiveTheCode()
         }
         DataBase.save();
 
