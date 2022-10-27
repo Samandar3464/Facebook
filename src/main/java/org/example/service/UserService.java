@@ -40,17 +40,6 @@ public class UserService {
         }
         return null;
     }
-
-    public  void showFriends(User user){
-        for (User allUser : DataBase.allUsers) {
-            if (allUser!=null&&allUser.isActive()){
-                if (allUser.equals(user)){
-                    System.out.println(allUser.getFriendsId());
-                }
-            }
-        }
-    }
-
     public User getByUserName(String userName) {
         for (User allUser : DataBase.allUsers) {
             if (allUser!=null&&allUser.isActive()&&allUser.getUserName().equals(userName)) return allUser;
