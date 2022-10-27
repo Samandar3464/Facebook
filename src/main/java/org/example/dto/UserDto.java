@@ -106,41 +106,4 @@ public class UserDto {
         return userService.logIn(phone, password);
     }
 
-    public  void chatFront(User user){
-        int var=10;
-        while (var!=0){
-            chatService.showChats(user.getChatId(), user.getId());
-            System.out.println("\n"+" 1.Add chat 2.Chat with one contact 3. Delete chat");
-           var=scannerInt.nextInt();
-            switch (var){
-            case 1->{
-                userService.showFriends(user);
-
-            }
-            case 2->{
-                System.out.println();
-              //  chatService.getChatById(user.getChatId())
-            }
-            case 3->{}
-            case 0->{}
-            }
-        }
-
-    }
-    public  boolean add(User user) throws IOException {
-       return userService.registration(user);
-    }
-
-    public static boolean logIn() throws IOException {
-        System.out.println("Enter phoneNumber or your gmail: ");
-        String phoneNumber=scannerStr.nextLine();
-        System.out.println("Enter PASSWORD: ");
-        String password=scannerStr.nextLine();
-
-        User login = userService.logIn(phoneNumber,password);
-        if (login!=null){
-            return true;
-        }
-        return false;
-    }
 }
