@@ -1,0 +1,62 @@
+[
+  {
+    "type": "request",
+    "senderId": 2,
+    "receiverId": 3,
+    "postId": 0,
+    "notificationMessage": "Samandar you have received a friend request",
+    "id": 6,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:30:44 PM"
+  },
+  {
+    "type": "request",
+    "senderId": 2,
+    "receiverId": 5,
+    "postId": 0,
+    "notificationMessage": "Samandar you have received a friend request",
+    "id": 9,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:32:39 PM"
+  },
+  {
+    "type": "request",
+    "senderId": 2,
+    "receiverId": 3,
+    "postId": 0,
+    "notificationMessage": " you have received a friend request from Samandar",
+    "id": 6,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:37:14 PM"
+  },
+  {
+    "type": "request",
+    "senderId": 5,
+    "receiverId": 2,
+    "postId": 0,
+    "notificationMessage": " you have received a friend request from Dilafruz",
+    "id": 6,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:43:56 PM"
+  },
+  {
+    "type": "request",
+    "senderId": 2,
+    "receiverId": 5,
+    "postId": 0,
+    "notificationMessage": " you have received a friend request from Samandar",
+    "id": 8,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:46:02 PM"
+  },
+  {
+    "type": "request",
+    "senderId": 5,
+    "receiverId": 2,
+    "postId": 0,
+    "notificationMessage": " you have received a friend request from Dilafruz",
+    "id": 6,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:48:08 PM"
+  }
+]

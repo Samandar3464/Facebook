@@ -1,0 +1,38 @@
+{
+  "7": {
+    "senderId": 5,
+    "receiverId": 10,
+    "senderName": "Dilafruz",
+    "massage": "salom samandar",
+    "id": 7,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:44:32 PM"
+  },
+  "8": {
+    "senderId": 2,
+    "receiverId": 7,
+    "senderName": "Samandar",
+    "massage": "salom asror",
+    "id": 8,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:31:00 PM"
+  },
+  "11": {
+    "senderId": 2,
+    "receiverId": 10,
+    "senderName": "Samandar",
+    "massage": "salom dilafruz",
+    "id": 11,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:32:54 PM"
+  },
+  "12": {
+    "senderId": 3,
+    "receiverId": 7,
+    "senderName": "Asror",
+    "massage": "vo aleykum salom",
+    "id": 12,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:35:39 PM"
+  }
+}

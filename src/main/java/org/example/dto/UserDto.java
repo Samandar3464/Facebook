@@ -1,5 +1,6 @@
 package org.example.dto;
 
+import org.example.DataBase;
 import org.example.model.User;
 import org.example.service.ChatService;
 import org.example.service.NotificationService;
@@ -7,9 +8,6 @@ import org.example.service.UserService;
 
 import java.io.IOException;
 import java.util.Scanner;
-
-
-
 public class UserDto {
 
     static Scanner scannerStr=new Scanner(System.in);
@@ -53,7 +51,7 @@ public class UserDto {
         return user;
     }
 
-    public boolean uptoDateAccountFront(User user) {
+    public boolean uptoDateAccountFront(User user) throws IOException {
         System.out.println(user);
         System.out.println("What do you want to change ?");
         int a = 10;
@@ -71,11 +69,11 @@ public class UserDto {
                 }
                 case 3 -> {
                     System.out.println("enter new password");
-                    user.setFirstName(scannerStr.nextLine());
+                    user.setPassword(scannerStr.nextLine());
                 }
                 case 4 -> {
                     System.out.println("enter new birthday");
-                    user.setFirstName(scannerStr.nextLine());
+                    user.setBirthDay(scannerStr.nextLine());
                 }
                 case 5 -> {
                     System.out.println("GENDER: 1.MALE  2.FEMALE ");
@@ -93,6 +91,7 @@ public class UserDto {
 
                 }
                 case 0 -> {
+                    DataBase.save();
                 }
             }
         }

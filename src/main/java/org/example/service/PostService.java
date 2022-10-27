@@ -1,6 +1,5 @@
 package org.example.service;
 
-
 import org.example.DataBase;
 import org.example.model.Base;
 import org.example.model.Post;

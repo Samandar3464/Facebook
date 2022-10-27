@@ -35,24 +35,9 @@ public class NotificationService {
         }
     }
 
-
-
-
-    public Notification OneRequest(User user, int requestId ){
-        for (Notification notification : DataBase.notifications) {
-            if (notification != null) {
-                if (notification.getType().equals("request")) {
-                    if (notification.getReceiverId() == user.getId()&&notification.getId()==requestId) {
-                        return notification;
-                    }
-                }
-            }
-        }
-        return null;
-    }
     public Notification getNotificationById(int notificationId){
         for (int i = 0; i < DataBase.notifications.size(); i++) {
-            if (notifications.get(i)!=null){
+            if (notifications.get(i)!=null&&DataBase.notifications.get(i).isActive()){
                 if (notifications.get(i).getId()==notificationId){
                     return DataBase.notifications.get(i);
                 }

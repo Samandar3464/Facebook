@@ -1,0 +1,22 @@
+{
+  "7": {
+    "memberId1": 2,
+    "memberName1": "Samandar",
+    "memberName2": "Asror",
+    "memberId2": 3,
+    "massagesId": [],
+    "id": 7,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:30:49 PM"
+  },
+  "10": {
+    "memberId1": 2,
+    "memberName1": "Samandar",
+    "memberName2": "Dilafruz",
+    "memberId2": 5,
+    "massagesId": [],
+    "id": 10,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:32:41 PM"
+  }
+}

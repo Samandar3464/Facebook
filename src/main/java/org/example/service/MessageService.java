@@ -1,18 +1,15 @@
 package org.example.service;
 
 import org.example.DataBase;
-import org.example.model.Massege;
+import org.example.model.Massage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
 
 public  class MessageService {
 
-    public boolean addMessage(Massege massege) throws IOException {
-        DataBase.massages.put(massege.getId(), massege);
+    public boolean addMessage(Massage massage) throws IOException {
+        DataBase.massages.put(massage.getId(), massage);
         return true;
     }
 
@@ -29,7 +26,8 @@ public  class MessageService {
             for (Integer integer : DataBase.massages.keySet()) {
                 if (DataBase.massages.get(integer).isActive()&&
                         DataBase.massages.get(integer).getReceiverId() == chatId) {
-                    System.out.println(integer+" "+DataBase.massages.get(integer).getSenderName() + ":  " + DataBase.massages.get(integer).getMassage());
+                    SimpleDateFormat dateFormat=new SimpleDateFormat("dd/hh:mm");
+                    System.out.println(integer+" "+DataBase.massages.get(integer).getSenderName() + ":  " + DataBase.massages.get(integer).getMassage()+ "\n"+ dateFormat.format(DataBase.massages.get(integer).getDate()));
                 }
             }
         }
