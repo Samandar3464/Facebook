@@ -4,6 +4,7 @@ import org.example.DataBase;
 import org.example.model.Massege;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,8 @@ public  class MessageService {
             for (Integer integer : DataBase.massages.keySet()) {
                 if (DataBase.massages.get(integer).isActive()&&
                         DataBase.massages.get(integer).getReceiverId() == chatId) {
-                    System.out.println(integer+" "+DataBase.massages.get(integer).getSenderName() + ":  " + DataBase.massages.get(integer).getMassage());
+                    SimpleDateFormat dateFormat=new SimpleDateFormat("dd/hh:mm");
+                    System.out.println(integer+" "+DataBase.massages.get(integer).getSenderName() + ":  " + DataBase.massages.get(integer).getMassage()+ "\n"+ dateFormat.format(DataBase.massages.get(integer).getDate()));
                 }
             }
         }
