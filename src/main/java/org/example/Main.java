@@ -84,18 +84,19 @@ public class Main {
                         }
                         if (requestId != 0) {
                             Notification notification = notificationService.getNotificationById(requestId);
-                            if (notification != null && notification.getType().equals("request")) {
+                            if (notification != null &&notification.isActive()&& notification.getType().equals("request")) {
                                 String s = "";
                                 while (!s.equals("y") && !s.equals("n")) {
-                                    System.out.println(notification.getNotificationMessage());
                                     System.out.println("For acceptance request enter 'y' , for rejection enter 'n' ");
                                     s = scannerStr.nextLine();
-                                    if (s.equals('y')) {
+                                    if (s.equals("y")) {
                                         currentUser.getFriendsId().add(notification.getSenderId());
                                         userService.getById(notification.getSenderId()).getFriendsId().add(currentUser.getId());
                                         notification.setActive(false);
-                                    } else if (s.equals('n')) {
+                                        System.out.println("you accepted");
+                                    } else if (s.equals("y")) {
                                         notification.setActive(false);
+                                        System.out.println("you did not accept");
                                     } else {
                                         System.out.println("Please enter only (y or n)");
                                     }
@@ -109,9 +110,9 @@ public class Main {
                 case 4 -> {
                     if (currentUser.getChatId().isEmpty()) System.out.println("Chat is empty");
                     else {
-                        chatService.showChats(currentUser.getChatId(), currentUser.getId());
                         int varChat = 10;
                         while (varChat != 0) {
+                            chatService.showChats(currentUser.getChatId(), currentUser.getId());
                             System.out.println("enter chatId \n 0-> back");
                             varChat = scannerInt.nextInt();
                             if (varChat == 0) {
@@ -140,25 +141,28 @@ public class Main {
                             }
                             if (varSearch == 1) {
                                 if (!currentUser.getFriendsId().contains(user.getId())) {
-                                    Notification requestNotification = notificationDto.createRequestNotification(currentUser, user);
-                                    NotificationService.addNotification(requestNotification);
-                                    System.out.println("Request sanded ");
-                                } else System.out.println("You are friends");
-                            } else if (varSearch == 2) {
-                                Chat exitChat = chatService.isExitChat(currentUser.getId(), user.getId());
-                                if (exitChat != null) {
-                                    chatView(exitChat, currentUser);
-                                } else {
-                                    Chat chat = new Chat(currentUser.getId(), currentUser.getFirstName(), user.getId(), user.getFirstName());
-                                    chatService.addChat(chat);
-                                    currentUser.getChatId().add(chat.getId());
-                                    user.getChatId().add(chat.getId());
-                                    chatView(chat, currentUser);
+                                    if (!NotificationService.isExitNotification(currentUser, user)) {
+                                        Notification requestNotification = notificationDto.createRequestNotification(currentUser, user);
+                                        NotificationService.addNotification(requestNotification);
+                                        System.out.println("Request sanded ");
+                                    }
+                                    else System.out.println("Request already sanded");
+                                }else System.out.println("You are friends");
+                            }else if (varSearch == 2) {
+                                    Chat exitChat = chatService.isExitChat(currentUser.getId(), user.getId());
+                                    if (exitChat != null) {
+                                        chatView(exitChat, currentUser);
+                                    } else {
+                                        Chat chat = new Chat(currentUser.getId(), currentUser.getFirstName(), user.getId(), user.getFirstName());
+                                        chatService.addChat(chat);
+                                        currentUser.getChatId().add(chat.getId());
+                                        user.getChatId().add(chat.getId());
+                                        chatView(chat, currentUser);
+                                    }
                                 }
                             }
-                        }
 
-                    } else System.out.println("Nothing found");
+                        } else System.out.println("Nothing found");
                 }
                 case 0 -> {
                     DataBase.save();
@@ -168,9 +172,9 @@ public class Main {
     }
 
     private static void chatView(Chat chat, User currentUser) throws IOException {
-        messageService.showAllMessages(chat.getId());
         int varChatView = 10;
         while (varChatView != 0) {
+            messageService.showAllMessages(chat.getId());
             System.out.println("1-> Delete massage 2-> Sand massage 0-> back");
             varChatView = scannerInt.nextInt();
             if (varChatView == 1) {
