@@ -69,11 +69,11 @@ public class UserDto {
                 }
                 case 3 -> {
                     System.out.println("enter new password");
-                    user.setFirstName(scannerStr.nextLine());
+                    user.setPassword(scannerStr.nextLine());
                 }
                 case 4 -> {
                     System.out.println("enter new birthday");
-                    user.setFirstName(scannerStr.nextLine());
+                    user.setBirthDay(scannerStr.nextLine());
                 }
                 case 5 -> {
                     System.out.println("GENDER: 1.MALE  2.FEMALE ");

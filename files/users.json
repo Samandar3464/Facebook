@@ -61,5 +61,19 @@
     "id": 5,
     "isActive": true,
     "date": "Oct 27, 2022, 3:29:42 PM"
+  },
+  {
+    "firstName": "AAAAA",
+    "lastName": "AA",
+    "phoneNumber": "123",
+    "password": " ",
+    "userName": "AA",
+    "gender": "Male",
+    "birthDay": "1234",
+    "friendsId": [],
+    "chatId": [],
+    "id": 6,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:54:34 PM"
   }
 ]
