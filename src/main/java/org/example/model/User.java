@@ -1,10 +1,9 @@
 package org.example.model;
 import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.example.Base;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,6 +25,9 @@ protected ArrayList<Integer> chatId=new ArrayList<>();
 
     }
 
+    public User(String firstName, String lastName, String phoneNumber, String password, String confirm, String gender, String birthday) {
+    }
+
     public User(String firstName, String lastName, String phoneNumber, String password, String gender, String birthDay) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,6 +36,7 @@ protected ArrayList<Integer> chatId=new ArrayList<>();
         this.gender = gender;
         this.birthDay = birthDay;
     }
+
 
     @Override
     public String toString() {
@@ -46,5 +49,6 @@ protected ArrayList<Integer> chatId=new ArrayList<>();
                 ", gender='" + gender + '\'' +
                 ", birthDay='" + birthDay + '\'' +
                 '}';
+
     }
 }

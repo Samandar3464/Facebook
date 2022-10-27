@@ -1,8 +1,6 @@
-package org.example;
+package org.example.model;
 
 import lombok.Data;
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -11,7 +9,6 @@ public abstract class Base {
     protected int id;
     private boolean isActive;
     private Date date;
-
     public Base() {
         this.id = idgen++;
         this.date = new Date();
