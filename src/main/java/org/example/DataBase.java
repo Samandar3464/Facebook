@@ -28,7 +28,7 @@ public class DataBase {
     public static void start() throws IOException {
 //        MESSAGE
 
-        File massage = new File("files\\massage.txt");
+        File massage = new File("files\\massages.txt");
         massage.createNewFile();
         FileReader messageFileReader = new FileReader(massage);
         massages = gson.fromJson(messageFileReader, new TypeToken<HashMap<Integer, Massege>>() {
