@@ -12,9 +12,9 @@ public class NotificationDto {
     Scanner scannerInt = new Scanner(System.in);
     Scanner scannerStr = new Scanner(System.in);
 
-    public  Notification createRequestnotification(User currentUser, User user) {
+    public  Notification createRequestNotification(User currentUser, User user) {
         return new Notification("request",currentUser.getId(),user.getId(),
-                currentUser.getFirstName()+" sizga do'stlik so'rovini yubordi");
+                currentUser.getFirstName()+" you have received a friend request");
     }
 
     public void notification(User user) throws IOException {
