@@ -1,0 +1,16 @@
+[
+  {
+    "firstName": "1",
+    "lastName": "1",
+    "phoneNumber": "1",
+    "password": "1",
+    "userName": "1",
+    "gender": "Male",
+    "birthDay": "1",
+    "friendsId": [],
+    "chatId": [],
+    "id": 2,
+    "isActive": true,
+    "date": "Oct 27, 2022, 9:42:40 AM"
+  }
+]

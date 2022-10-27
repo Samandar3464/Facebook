@@ -21,7 +21,7 @@ public class ChatService {
     }
 
     public Chat getChatById(int chatId) {
-        if(DataBase.chats.get(chatId).isActive())return DataBase.chats.get(chatId);
+        if(DataBase.chats.get(chatId)!=null&&DataBase.chats.get(chatId).isActive())return DataBase.chats.get(chatId);
     else return null;
     }
 

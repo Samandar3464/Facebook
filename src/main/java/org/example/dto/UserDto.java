@@ -1,5 +1,6 @@
 package org.example.dto;
 
+import org.example.DataBase;
 import org.example.model.User;
 import org.example.service.ChatService;
 import org.example.service.NotificationService;
@@ -47,7 +48,7 @@ public class UserDto {
         return user;
     }
 
-    public boolean uptoDateAccountFront(User user) {
+    public boolean uptoDateAccountFront(User user) throws IOException {
         System.out.println(user);
         System.out.println("What do you want to change ?");
         int a = 10;
@@ -87,6 +88,7 @@ public class UserDto {
 
                 }
                 case 0 -> {
+                    DataBase.save();
                 }
             }
         }
