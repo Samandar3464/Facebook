@@ -1,16 +1,65 @@
 [
   {
-    "firstName": "1",
-    "lastName": "1",
+    "firstName": "Samandar",
+    "lastName": "Shodmonov",
     "phoneNumber": "1",
     "password": "1",
-    "userName": "1",
+    "userName": "samandar",
     "gender": "Male",
     "birthDay": "1",
     "friendsId": [],
-    "chatId": [],
+    "chatId": [
+      7,
+      10
+    ],
     "id": 2,
     "isActive": true,
-    "date": "Oct 27, 2022, 9:42:40 AM"
+    "date": "Oct 27, 2022, 3:27:56 PM"
+  },
+  {
+    "firstName": "Asror",
+    "lastName": "A",
+    "phoneNumber": "2",
+    "password": "2",
+    "userName": "asror",
+    "gender": "Male",
+    "birthDay": "2",
+    "friendsId": [],
+    "chatId": [
+      7
+    ],
+    "id": 3,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:28:36 PM"
+  },
+  {
+    "firstName": "Azmiddin",
+    "lastName": "A",
+    "phoneNumber": "3",
+    "password": "3",
+    "userName": "azmiddin",
+    "gender": "Male",
+    "birthDay": "3",
+    "friendsId": [],
+    "chatId": [],
+    "id": 4,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:29:00 PM"
+  },
+  {
+    "firstName": "Dilafruz",
+    "lastName": "D",
+    "phoneNumber": "4",
+    "password": "",
+    "userName": "4",
+    "gender": "Female",
+    "birthDay": "4",
+    "friendsId": [],
+    "chatId": [
+      10
+    ],
+    "id": 5,
+    "isActive": true,
+    "date": "Oct 27, 2022, 3:29:42 PM"
   }
 ]

@@ -6,10 +6,8 @@ import com.google.gson.reflect.TypeToken;
 import org.example.model.*;
 
 import java.io.*;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Stack;
 
 public class DataBase {
@@ -17,7 +15,7 @@ public class DataBase {
     public static BufferedWriter bufferedWriter = null;
 
 
-    public static HashMap<Integer, Massege> massages = null;
+    public static HashMap<Integer, Massage> massages = null;
     public static HashMap<Integer, Chat> chats = new HashMap<>();
     public static HashMap<Integer, Commit> commits = new HashMap<>();
     public static HashMap<Integer, Post> posts = new HashMap<>();
@@ -31,7 +29,7 @@ public class DataBase {
         File massage = new File("files\\massages.json");
         massage.createNewFile();
         FileReader messageFileReader = new FileReader(massage);
-        massages = gson.fromJson(messageFileReader, new TypeToken<HashMap<Integer, Massege>>() {
+        massages = gson.fromJson(messageFileReader, new TypeToken<HashMap<Integer, Massage>>() {
         }.getType());
         messageFileReader.close();
         if (massages == null) {

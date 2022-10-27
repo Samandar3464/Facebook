@@ -32,7 +32,6 @@ public class Main {
     static PostService postService = new PostService();
 
     public static void main(String[] args) throws IOException {
-        ArrayList arrayList = new ArrayList();
         DataBase.start();
         int mainCase = 10;
         while (mainCase != 0) {
@@ -92,7 +91,7 @@ public class Main {
                                     System.out.println("For acceptance request enter 'y' , for rejection enter 'n' ");
                                     s = scannerStr.nextLine();
                                     if (s.equals('y')) {
-                                        Main.user.getFriendsId().add(notification.getSenderId());
+                                        currentUser.getFriendsId().add(notification.getSenderId());
                                         userService.getById(notification.getSenderId()).getFriendsId().add(currentUser.getId());
                                         notification.setActive(false);
                                     } else if (s.equals('n')) {
@@ -141,8 +140,8 @@ public class Main {
                             }
                             if (varSearch == 1) {
                                 if (!currentUser.getFriendsId().contains(user.getId())) {
-                                    Notification requestnotification = notificationDto.createRequestNotification(currentUser, user);
-                                    NotificationService.addNotification(requestnotification);
+                                    Notification requestNotification = notificationDto.createRequestNotification(currentUser, user);
+                                    NotificationService.addNotification(requestNotification);
                                     System.out.println("Request sanded ");
                                 } else System.out.println("You are friends");
                             } else if (varSearch == 2) {
@@ -181,10 +180,10 @@ public class Main {
                 else System.out.println("was not deleted");
             } else if (varChatView == 2) {
                 System.out.println("0-> back");
-                Massege massege = messageDto.createMessage(chat.getId(), currentUser.getId(), currentUser.getFirstName());
-                while (massege != null) {
-                    messageService.addMessage(massege);
-                    massege = messageDto.createMessage(chat.getId(), currentUser.getId(), currentUser.getFirstName());
+                Massage massage = messageDto.createMessage(chat.getId(), currentUser.getId(), currentUser.getFirstName());
+                while (massage != null) {
+                    messageService.addMessage(massage);
+                    massage = messageDto.createMessage(chat.getId(), currentUser.getId(), currentUser.getFirstName());
                 }
             }
         }

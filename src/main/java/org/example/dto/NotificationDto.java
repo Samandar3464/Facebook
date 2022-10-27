@@ -14,7 +14,7 @@ public class NotificationDto {
 
     public  Notification createRequestNotification(User currentUser, User user) {
         return new Notification("request",currentUser.getId(),user.getId(),
-                currentUser.getFirstName()+" you have received a friend request");
+                " you have received a friend request from "+ currentUser.getFirstName());
     }
 
     public void notification(User user) throws IOException {

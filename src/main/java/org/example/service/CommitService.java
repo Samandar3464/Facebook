@@ -1,6 +1,6 @@
 package org.example.service;
-import org.example.Base;
 import org.example.DataBase;
+import org.example.model.Base;
 import org.example.model.Post;
 
 public class CommitService extends Base {
