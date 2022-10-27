@@ -6,17 +6,26 @@ import org.example.model.User;
 
 import java.io.IOException;
 
-import static org.example.DataBase.notifications;
+
 
 public class NotificationService {
     public static void addNotification(Notification requestnotification) {
         DataBase.notifications.add(requestnotification);
     }
 
-    public void showNotificationDefaultUser(User user) throws IOException {
-
+    public static boolean isExitNotification(User currentUser, User user) {
+        if (DataBase.notifications.isEmpty()) return false;
         for (Notification notification : DataBase.notifications) {
-            System.out.println("\n" + "Enter requestId for acceptance or delete");
+            if (notification!=null&&notification.isActive()){
+                if (notification.getSenderId()==currentUser.getId()&&notification.getReceiverId()==user.getId()) return true;
+            }
+        }
+        return false;
+    }
+
+    public void showNotificationDefaultUser(User user) throws IOException {
+            if (!DataBase.notifications.isEmpty()) System.out.println("\n" + "Enter requestId for acceptance or delete");
+        for (Notification notification : DataBase.notifications) {
             if (notification != null&&notification.isActive()) {
                 if (notification.getType().equals("request")) {
                     if (notification.getReceiverId() == user.getId()) {
@@ -37,8 +46,8 @@ public class NotificationService {
 
     public Notification getNotificationById(int notificationId){
         for (int i = 0; i < DataBase.notifications.size(); i++) {
-            if (notifications.get(i)!=null&&DataBase.notifications.get(i).isActive()){
-                if (notifications.get(i).getId()==notificationId){
+            if (DataBase.notifications.get(i)!=null&&DataBase.notifications.get(i).isActive()){
+                if (DataBase.notifications.get(i).getId()==notificationId){
                     return DataBase.notifications.get(i);
                 }
             }

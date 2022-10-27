@@ -23,13 +23,15 @@ public  class MessageService {
 
         public void showAllMessages ( int chatId){
             if (DataBase.massages == null) return;
+            String s="";
             for (Integer integer : DataBase.massages.keySet()) {
                 if (DataBase.massages.get(integer).isActive()&&
                         DataBase.massages.get(integer).getReceiverId() == chatId) {
                     SimpleDateFormat dateFormat=new SimpleDateFormat("dd/hh:mm");
-                    System.out.println(integer+" "+DataBase.massages.get(integer).getSenderName() + ":  " + DataBase.massages.get(integer).getMassage()+ "\n"+ dateFormat.format(DataBase.massages.get(integer).getDate()));
+                    s+=integer+" "+DataBase.massages.get(integer).getSenderName() + ":  " + DataBase.massages.get(integer).getMassage()+ "\n"+ dateFormat.format(DataBase.massages.get(integer).getDate())+"\n";
                 }
             }
+            System.out.println(s);
         }
     }
 
