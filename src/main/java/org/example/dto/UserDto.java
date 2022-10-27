@@ -26,6 +26,9 @@ public class UserDto {
         System.out.println("LAST NAME: ");
         String lastName = scannerStr.nextLine();
         user.setLastName(lastName);
+        System.out.println("USER NAME: ");
+        String userName = scannerStr.nextLine();
+        user.setUserName(userName);
         System.out.println("PHONE NUMBER: ");
         String phoneNumber = scannerStr.nextLine();
         user.setPhoneNumber(phoneNumber);
@@ -103,8 +106,6 @@ public class UserDto {
         String password = scannerStr.nextLine();
         return userService.logIn(phone, password);
     }
-
-
 
     public  void chatFront(User user){
         int var=10;

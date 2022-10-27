@@ -1,9 +1,15 @@
 package org.example.model;
 import lombok.Data;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-@Data
+@Getter
+@Setter
 public class User extends Base {
 private String firstName;
 private String lastName;
@@ -14,9 +20,9 @@ private  String gender;
 private String birthDay;
 protected List<Integer> friendsId=new ArrayList<>(); // patpisatsa qilingan kantaktlar
 protected ArrayList<Integer> chatId=new ArrayList<>();
-protected  List<Integer > notification=new ArrayList<>();
 
     public User() {
+
     }
 
     public User(String firstName, String lastName, String phoneNumber, String password, String confirm, String gender, String birthday) {
@@ -31,7 +37,18 @@ protected  List<Integer > notification=new ArrayList<>();
         this.birthDay = birthDay;
     }
 
-    public int getId() {
-        return 0;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", userName='" + userName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthDay='" + birthDay + '\'' +
+                '}';
+
     }
 }

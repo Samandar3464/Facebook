@@ -11,7 +11,7 @@ import java.util.Map;
 public class ChatService {
     public void showChats(ArrayList<Integer> chats, int userId) {
         for (int chat : chats) {
-            if (DataBase.chats.get(chat) != null) {
+            if (DataBase.chats.get(chat) != null&&DataBase.chats.get(chat).isActive()) {
                 if (DataBase.chats.get(chat).getMemberId1() == userId)
                     System.out.println(DataBase.chats.get(chat).getId() + "=>  " + DataBase.chats.get(chat).getMemberName2());
                 else
@@ -21,7 +21,8 @@ public class ChatService {
     }
 
     public Chat getChatById(int chatId) {
-        return DataBase.chats.get(chatId);
+        if(DataBase.chats.get(chatId).isActive())return DataBase.chats.get(chatId);
+    else return null;
     }
 
     public boolean addChat(Chat chat) {
@@ -33,18 +34,19 @@ public class ChatService {
     }
 
     public boolean deleteChat(int chatId) {
-        return DataBase.chats.remove(chatId) != null;
+        DataBase.chats.get(chatId).setActive(false);
+        return true;
     }
 
 
-    public boolean isExitChat(int id, int id1) {
+    public Chat isExitChat(int id, int id1) {
         for (Map.Entry<Integer, Chat> integerChatEntry : DataBase.chats.entrySet()) {
-            if (integerChatEntry.getValue().getMemberId1()==id&&integerChatEntry.getValue().getMemberId2()==id1||
-                    integerChatEntry.getValue().getMemberId1()==id1&&integerChatEntry.getValue().getMemberId2()==id){
-                return true;
+            if (integerChatEntry.getValue().isActive()&&(integerChatEntry.getValue().getMemberId1()==id&&integerChatEntry.getValue().getMemberId2()==id1||
+                    integerChatEntry.getValue().getMemberId1()==id1&&integerChatEntry.getValue().getMemberId2()==id)){
+                return integerChatEntry.getValue();
             }
         }
-        return false;
+        return null;
     }
 }
 

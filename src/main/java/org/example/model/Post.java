@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Post extends Base {
 private int ownerId;
-private  Object post;
+private  String post;
 private int likes;
 protected List<Integer> commits=new LinkedList<>();
 }

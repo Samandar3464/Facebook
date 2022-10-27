@@ -14,17 +14,19 @@ public class NotificationService {
     }
 
     public void showNotificationDefaultUser(User user) throws IOException {
-        for (Notification notification : notifications) {
-            if (notification != null) {
+
+        for (Notification notification : DataBase.notifications) {
+            System.out.println("\n" + "Enter requestId for acceptance or delete");
+            if (notification != null&&notification.isActive()) {
                 if (notification.getType().equals("request")) {
                     if (notification.getReceiverId() == user.getId()) {
-                        System.out.println(notification.getNotificationMessage());
+                        System.out.println(notification.getId()+" : "+notification.getNotificationMessage());
                     }
                 } else {
                     for (Integer contactId : user.getFriendsId()) {
                         if (contactId != null) {
                             if (contactId == notification.getSenderId()) {
-                                System.out.println(notification.getNotificationMessage());
+                                System.out.println(notification.getId()+" : "+notification.getNotificationMessage());
                             }
                         }
                     }
@@ -32,6 +34,7 @@ public class NotificationService {
             }
         }
     }
+
 
 
 
