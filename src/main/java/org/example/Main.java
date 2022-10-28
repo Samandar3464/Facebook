@@ -184,7 +184,7 @@ public class Main {
                 else System.out.println("was not deleted");
             } else if (varChatView == 2) {
                 System.out.println("0-> back");
-                Massage massage = messageDto.createMessage(chat.getId(), currentUser.getId(), currentUser.getFirstName());
+                Massege massage = messageDto.createMessage(chat.getId(), currentUser.getId(), currentUser.getFirstName());
                 while (massage != null) {
                     messageService.addMessage(massage);
                     massage = messageDto.createMessage(chat.getId(), currentUser.getId(), currentUser.getFirstName());

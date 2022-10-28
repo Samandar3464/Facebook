@@ -1,0 +1,38 @@
+{
+  "6": {
+    "senderId": 1,
+    "receiverId": 5,
+    "senderName": "AA",
+    "massage": "Azmiddin nima gapla",
+    "id": 6,
+    "isActive": true,
+    "date": "Oct 28, 2022, 1:30:11 PM"
+  },
+  "7": {
+    "senderId": 1,
+    "receiverId": 5,
+    "senderName": "AA",
+    "massage": "tinchmisan ozing a ",
+    "id": 7,
+    "isActive": true,
+    "date": "Oct 28, 2022, 1:30:17 PM"
+  },
+  "8": {
+    "senderId": 0,
+    "receiverId": 5,
+    "senderName": "Azmiddin",
+    "massage": "Ha yaxshi rahmat",
+    "id": 8,
+    "isActive": true,
+    "date": "Oct 28, 2022, 1:31:10 PM"
+  },
+  "9": {
+    "senderId": 0,
+    "receiverId": 5,
+    "senderName": "Azmiddin",
+    "massage": "ozingchi",
+    "id": 9,
+    "isActive": true,
+    "date": "Oct 28, 2022, 1:31:15 PM"
+  }
+}

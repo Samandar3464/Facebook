@@ -1,0 +1,12 @@
+[
+  {
+    "type": "request",
+    "senderId": 0,
+    "receiverId": 1,
+    "postId": 0,
+    "notificationMessage": " you have received a friend request from Azmiddin",
+    "id": 4,
+    "isActive": false,
+    "date": "Oct 28, 2022, 1:28:49 PM"
+  }
+]

@@ -16,7 +16,7 @@ public class DataBase {
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static BufferedWriter bufferedWriter = null;
 
-    public static LinkedHashMap<Integer, Massage> massages = null;
+    public static LinkedHashMap<Integer, Massege> massages = null;
     public static HashMap<Integer, Chat> chats = new HashMap<>();
     public static HashMap<Integer, Commit> commits = new HashMap<>();
     public static HashMap<Integer, Post> posts = new HashMap<>();
@@ -42,7 +42,7 @@ public class DataBase {
         File massage = new File("files\\massages.json");
         massage.createNewFile();
         FileReader messageFileReader = new FileReader(massage);
-        massages = gson.fromJson(messageFileReader, new TypeToken<LinkedHashMap<Integer, Massage>>() {
+        massages = gson.fromJson(messageFileReader, new TypeToken<LinkedHashMap<Integer, Massege>>() {
         }.getType());
         messageFileReader.close();
         if (massages == null) {
