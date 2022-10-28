@@ -20,6 +20,7 @@ public class DataBase {
     public static HashMap<Integer, Chat> chats = new HashMap<>();
     public static HashMap<Integer, Commit> commits = new HashMap<>();
     public static HashMap<Integer, Post> posts = new HashMap<>();
+    public static HashMap<Integer, Group> groups = new HashMap<>();
     public static Stack<Notification> notifications = new Stack<>();
     public static ArrayList<User> allUsers = new ArrayList<>();
 
@@ -100,6 +101,18 @@ public class DataBase {
         if (posts == null) {
             posts = new HashMap<>();
         }
+
+        // Group
+
+        File group = new File("files\\groups.json");
+        group.createNewFile();
+        FileReader groupFileReader = new FileReader(group);
+        groups = gson.fromJson(groupFileReader,new TypeToken<HashMap<Integer, Group>>(){
+        }.getType());
+        groupFileReader.close();
+        if(groups == null){
+            groups = new HashMap<>();
+        }
     }
 
     public static void save() throws IOException {
@@ -160,5 +173,15 @@ public class DataBase {
         bufferedWriter = new BufferedWriter((new FileWriter(userWrite)));
         bufferedWriter.write(s);
         bufferedWriter.close();
-    }
+
+        // Group
+        File groupWrite = new File("files\\groups.json");
+        groupWrite.createNewFile();
+        s = gson.toJson(groups);
+        bufferedWriter = new BufferedWriter((new FileWriter(groupWrite)));
+        bufferedWriter.write(s);
+        bufferedWriter.close();
+
+
+         }
 }
