@@ -1,13 +1,25 @@
 package org.example.model;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
-@Data
+@Getter
+@Setter
 
 public class Post extends Base {
 private int ownerId;
 private  String post;
 private int likes;
 protected List<Integer> commits=new LinkedList<>();
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", ownerId=" + ownerId +
+                ", post='" + post + '\'' +
+                '}';
+    }
 }
 

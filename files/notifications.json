@@ -1,62 +1,42 @@
 [
   {
-    "type": "request",
-    "senderId": 2,
-    "receiverId": 3,
-    "postId": 0,
-    "notificationMessage": "Samandar you have received a friend request",
-    "id": 6,
+    "type": "post",
+    "senderId": 0,
+    "receiverId": 1,
+    "postId": 30,
+    "notificationMessage": "Post{id\u003d30, ownerId\u003d0, post\u003d\u0027new post\u0027}",
+    "id": 31,
     "isActive": true,
-    "date": "Oct 27, 2022, 3:30:44 PM"
+    "date": "Oct 28, 2022, 8:42:14 AM"
   },
   {
-    "type": "request",
-    "senderId": 2,
-    "receiverId": 5,
-    "postId": 0,
-    "notificationMessage": "Samandar you have received a friend request",
-    "id": 9,
+    "type": "post",
+    "senderId": 0,
+    "receiverId": 23,
+    "postId": 30,
+    "notificationMessage": "Post{id\u003d30, ownerId\u003d0, post\u003d\u0027new post\u0027}",
+    "id": 32,
     "isActive": true,
-    "date": "Oct 27, 2022, 3:32:39 PM"
+    "date": "Oct 28, 2022, 8:42:14 AM"
   },
   {
-    "type": "request",
-    "senderId": 2,
-    "receiverId": 3,
-    "postId": 0,
-    "notificationMessage": " you have received a friend request from Samandar",
-    "id": 6,
+    "type": "post",
+    "senderId": 0,
+    "receiverId": 1,
+    "postId": 37,
+    "notificationMessage": "Post{id\u003d37, ownerId\u003d0, post\u003d\u00272new adasddadasdasdads\u0027}",
+    "id": 38,
     "isActive": true,
-    "date": "Oct 27, 2022, 3:37:14 PM"
+    "date": "Oct 28, 2022, 8:52:54 AM"
   },
   {
-    "type": "request",
-    "senderId": 5,
-    "receiverId": 2,
-    "postId": 0,
-    "notificationMessage": " you have received a friend request from Dilafruz",
-    "id": 6,
+    "type": "post",
+    "senderId": 0,
+    "receiverId": 23,
+    "postId": 37,
+    "notificationMessage": "Post{id\u003d37, ownerId\u003d0, post\u003d\u00272new adasddadasdasdads\u0027}",
+    "id": 39,
     "isActive": true,
-    "date": "Oct 27, 2022, 3:43:56 PM"
-  },
-  {
-    "type": "request",
-    "senderId": 2,
-    "receiverId": 5,
-    "postId": 0,
-    "notificationMessage": " you have received a friend request from Samandar",
-    "id": 8,
-    "isActive": true,
-    "date": "Oct 27, 2022, 3:46:02 PM"
-  },
-  {
-    "type": "request",
-    "senderId": 5,
-    "receiverId": 2,
-    "postId": 0,
-    "notificationMessage": " you have received a friend request from Dilafruz",
-    "id": 6,
-    "isActive": true,
-    "date": "Oct 27, 2022, 3:48:08 PM"
+    "date": "Oct 28, 2022, 8:52:54 AM"
   }
 ]

@@ -1,79 +1,51 @@
 [
   {
-    "firstName": "Samandar",
-    "lastName": "Shodmonov",
+    "firstName": "1",
+    "lastName": "1",
     "phoneNumber": "1",
     "password": "1",
-    "userName": "samandar",
+    "userName": "1",
     "gender": "Male",
     "birthDay": "1",
-    "friendsId": [],
-    "chatId": [
-      7,
-      10
+    "friendsId": [
+      1,
+      23
     ],
-    "id": 2,
+    "chatId": [],
+    "id": 0,
     "isActive": true,
-    "date": "Oct 27, 2022, 3:27:56 PM"
+    "date": "Oct 27, 2022, 10:17:05 PM"
   },
   {
-    "firstName": "Asror",
-    "lastName": "A",
+    "firstName": "2",
+    "lastName": "2",
     "phoneNumber": "2",
     "password": "2",
-    "userName": "asror",
+    "userName": "2",
     "gender": "Male",
     "birthDay": "2",
-    "friendsId": [],
-    "chatId": [
-      7
+    "friendsId": [
+      0
     ],
-    "id": 3,
+    "chatId": [],
+    "id": 1,
     "isActive": true,
-    "date": "Oct 27, 2022, 3:28:36 PM"
+    "date": "Oct 27, 2022, 10:17:43 PM"
   },
   {
-    "firstName": "Azmiddin",
-    "lastName": "A",
+    "firstName": "3",
+    "lastName": "3",
     "phoneNumber": "3",
     "password": "3",
-    "userName": "azmiddin",
+    "userName": "3",
     "gender": "Male",
     "birthDay": "3",
-    "friendsId": [],
-    "chatId": [],
-    "id": 4,
-    "isActive": true,
-    "date": "Oct 27, 2022, 3:29:00 PM"
-  },
-  {
-    "firstName": "Dilafruz",
-    "lastName": "D",
-    "phoneNumber": "4",
-    "password": "",
-    "userName": "4",
-    "gender": "Female",
-    "birthDay": "4",
-    "friendsId": [],
-    "chatId": [
-      10
+    "friendsId": [
+      0
     ],
-    "id": 5,
-    "isActive": true,
-    "date": "Oct 27, 2022, 3:29:42 PM"
-  },
-  {
-    "firstName": "AAAAA",
-    "lastName": "AA",
-    "phoneNumber": "123",
-    "password": " ",
-    "userName": "AA",
-    "gender": "Male",
-    "birthDay": "1234",
-    "friendsId": [],
     "chatId": [],
-    "id": 6,
+    "id": 23,
     "isActive": true,
-    "date": "Oct 27, 2022, 3:54:34 PM"
+    "date": "Oct 28, 2022, 1:00:48 AM"
   }
 ]

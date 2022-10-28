@@ -22,7 +22,7 @@ public class UserService {
     public User logIn(String phoneNumber, String password) {
         if (DataBase.allUsers == null) return null;
         for (User user : DataBase.allUsers) {
-            if (user !=null){
+            if (user !=null&& user.isActive()){
                 if (user.isActive()&&user.getPhoneNumber().equals(phoneNumber)&& user.getPassword().equals(password)){
                     return user;
                 }

@@ -1,6 +1,7 @@
 package org.example.dto;
 
 import org.example.DataBase;
+import org.example.model.Notification;
 import org.example.model.User;
 import org.example.service.ChatService;
 import org.example.service.NotificationService;

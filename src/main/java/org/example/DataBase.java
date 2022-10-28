@@ -8,14 +8,15 @@ import org.example.model.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Stack;
 
 public class DataBase {
+    public static Integer idGeneration = 0;
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static BufferedWriter bufferedWriter = null;
 
-
-    public static HashMap<Integer, Massage> massages = null;
+    public static LinkedHashMap<Integer, Massage> massages = new LinkedHashMap<>();
     public static HashMap<Integer, Chat> chats = new HashMap<>();
     public static HashMap<Integer, Commit> commits = new HashMap<>();
     public static HashMap<Integer, Post> posts = new HashMap<>();
@@ -24,16 +25,27 @@ public class DataBase {
 
 
     public static void start() throws IOException {
+//        ID GENERATION
+        File id = new File("files\\idGeneration.json");
+        id.createNewFile();
+        FileReader idFileReader = new FileReader(id);
+        idGeneration = gson.fromJson(idFileReader, new TypeToken<Integer>() {
+        }.getType());
+        idFileReader.close();
+        if (idGeneration == null) {
+            idGeneration = 0;
+        }
+
 //        MESSAGE
 
         File massage = new File("files\\massages.json");
         massage.createNewFile();
         FileReader messageFileReader = new FileReader(massage);
-        massages = gson.fromJson(messageFileReader, new TypeToken<HashMap<Integer, Massage>>() {
+        massages = gson.fromJson(messageFileReader, new TypeToken<LinkedHashMap<Integer, Massage>>() {
         }.getType());
         messageFileReader.close();
         if (massages == null) {
-            massages = new HashMap<>();
+            massages = new LinkedHashMap<>();
         }
 
 //        USER
@@ -92,6 +104,15 @@ public class DataBase {
 
     public static void save() throws IOException {
         String s = null;
+//        IDGENERATION
+
+        File idFile = new File("files\\idGeneration.json");
+        idFile.createNewFile();
+        s = gson.toJson(idGeneration);
+        bufferedWriter = new BufferedWriter((new FileWriter(idFile)));
+        bufferedWriter.write(s);
+        bufferedWriter.close();
+
 //        MESSAGE
         File massageFile = new File("files\\massages.json");
         massageFile.createNewFile();
