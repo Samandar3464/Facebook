@@ -5,7 +5,6 @@ import org.example.model.*;
 import org.example.service.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -69,9 +68,11 @@ public class Main {
             switch (var) {
                 case 1 -> {
                     System.out.println(userDto.uptoDateAccountFront(currentUser));
+                    DataBase.save();
                 }
                 case 2 -> {
-
+                    post();
+                    DataBase.save();
                 }
                 case 3 -> {
                     int varNotion = 10;
@@ -84,7 +85,7 @@ public class Main {
                         }
                         if (requestId != 0) {
                             Notification notification = notificationService.getNotificationById(requestId);
-                            if (notification != null &&notification.isActive()&& notification.getType().equals("request")) {
+                            if (notification != null && notification.isActive() && notification.getType().equals("request")) {
                                 String s = "";
                                 while (!s.equals("y") && !s.equals("n")) {
                                     System.out.println("For acceptance request enter 'y' , for rejection enter 'n' ");
@@ -103,6 +104,7 @@ public class Main {
                                 }
                             } else if (notification.getType().equals("post")) {
                                 System.out.println(notification.getNotificationMessage());
+LikeAndCommit(notification);
                             }
                         } else varNotion = 0;
                     }
@@ -145,24 +147,23 @@ public class Main {
                                         Notification requestNotification = notificationDto.createRequestNotification(currentUser, user);
                                         NotificationService.addNotification(requestNotification);
                                         System.out.println("Request sanded ");
-                                    }
-                                    else System.out.println("Request already sanded");
-                                }else System.out.println("You are friends");
-                            }else if (varSearch == 2) {
-                                    Chat exitChat = chatService.isExitChat(currentUser.getId(), user.getId());
-                                    if (exitChat != null) {
-                                        chatView(exitChat, currentUser);
-                                    } else {
-                                        Chat chat = new Chat(currentUser.getId(), currentUser.getFirstName(), user.getId(), user.getFirstName());
-                                        chatService.addChat(chat);
-                                        currentUser.getChatId().add(chat.getId());
-                                        user.getChatId().add(chat.getId());
-                                        chatView(chat, currentUser);
-                                    }
+                                    } else System.out.println("Request already sanded");
+                                } else System.out.println("You are friends");
+                            } else if (varSearch == 2) {
+                                Chat exitChat = chatService.isExitChat(currentUser.getId(), user.getId());
+                                if (exitChat != null) {
+                                    chatView(exitChat, currentUser);
+                                } else {
+                                    Chat chat = new Chat(currentUser.getId(), currentUser.getFirstName(), user.getId(), user.getFirstName());
+                                    chatService.addChat(chat);
+                                    currentUser.getChatId().add(chat.getId());
+                                    user.getChatId().add(chat.getId());
+                                    chatView(chat, currentUser);
                                 }
                             }
+                        }
 
-                        } else System.out.println("Nothing found");
+                    } else System.out.println("Nothing found");
                 }
                 case 0 -> {
                     DataBase.save();
@@ -192,5 +193,67 @@ public class Main {
             }
         }
 
+    }
+
+    private static void post() throws IOException {
+        int varPost = 10;
+        while (varPost != 0) {
+            System.out.println("1. Add post 2. Delete post 3.show one post");
+            varPost = scannerInt.nextInt();
+            switch (varPost) {
+                case 1 -> {
+                    Post post = postDto.creatPost(user.getId());
+                    System.out.println(postService.add(post));
+                    for (Integer integer : user.getFriendsId()) {
+                        Notification post1 = notificationDto.createPostNotification(user.getId(),integer,"post",post.getId(), String.valueOf(post));
+                        notificationService.addPostNotification(post1);
+                    }
+                }
+                case 2 -> {
+                    postService.showAllPostsCurrentUser(user.getId());
+                    int i = postDto.deletePost();
+                    System.out.println(postService.deletePost(i, user.getId()));
+                }
+                case 3 -> {
+                    postService.showAllPostsCurrentUser(user.getId());
+                    System.out.println("enter post id for see commits and likes");
+                    int postId = scannerInt.nextInt();
+                    Post post = postService.showOnePost(postId, user.getId());
+                    System.out.println(post);
+                    int varCommit = 10;
+                    while (varCommit != 0) {
+                        System.out.println("1.Likes  2.show commits 0.back");
+                        varCommit = scannerInt.nextInt();
+                        if (varCommit == 1) {
+                            System.out.println("Likes " + post.getLikes());
+                        } else if (varCommit==2){
+                            commitDto.showCommits(post.getId());
+                        }else {
+                            DataBase.save();
+                            break;
+                        }
+                    }
+                }
+                case 0 -> {
+                    DataBase.save();
+                }
+            }
+        }
+    }
+
+    private static void LikeAndCommit(Notification notification) throws IOException {
+        int varCommit=10;
+        while (varCommit!=0) {
+            System.out.println("1.Click like 2. Add commit 0. back");
+            varCommit=scannerInt.nextInt();
+            if (varCommit==1){
+                commitService.clickLike(postService.forNotification(notification.getPostId()));
+            } else if (varCommit==2) {
+                Commit commit = commitDto.creatCommit(postService.forNotification(notification.getPostId()), user.getUserName());
+                System.out.println(commitService.add(commit));
+            }else {
+                DataBase.save();
+            }
+        }
     }
 }

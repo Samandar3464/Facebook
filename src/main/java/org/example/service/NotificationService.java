@@ -12,7 +12,9 @@ public class NotificationService {
     public static void addNotification(Notification requestnotification) {
         DataBase.notifications.add(requestnotification);
     }
-
+    public static void addPostNotification(Notification postNotification) {
+        DataBase.notifications.add(postNotification);
+    }
     public static boolean isExitNotification(User currentUser, User user) {
         if (DataBase.notifications.isEmpty()) return false;
         for (Notification notification : DataBase.notifications) {

@@ -40,7 +40,6 @@ public class UserService {
         }
         return null;
     }
-
     public User getByUserName(String userName) {
         for (User allUser : DataBase.allUsers) {
             if (allUser!=null&&allUser.isActive()&&allUser.getUserName().equals(userName)) return allUser;

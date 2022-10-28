@@ -20,4 +20,11 @@ public class CommitDto {
         DataBase.commits.put(commit.getId(), commit);
         return commit;
     }
+    public void showCommits(int postId){
+        for (Integer integer : DataBase.commits.keySet()) {
+            if (DataBase.commits.get(integer).getPostId()==postId){
+                System.out.println(DataBase.commits.get(integer));
+            }
+        }
+    }
 }
