@@ -1,6 +1,6 @@
 package org.example.dto;
 
-import org.example.model.Massege;
+import org.example.model.Massage;
 import org.example.model.User;
 
 import java.util.Scanner;
@@ -11,9 +11,9 @@ public class MessageDto {
         String message="";
     }
 
-    public Massege createMessage(int chatId, int senderId, String firstName) {
+    public Massage createMessage(int chatId, int senderId, String firstName) {
         String message= scannerStr.nextLine();
         if (message.equals("0"))return null;
-        return new Massege(senderId,chatId,firstName,message);
+        return new Massage(senderId,chatId,firstName,message);
     }
 }

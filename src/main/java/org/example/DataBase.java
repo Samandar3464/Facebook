@@ -12,15 +12,14 @@ import java.util.LinkedHashMap;
 import java.util.Stack;
 
 public class DataBase {
-    public static Integer idGeneration=0;
+    public static Integer idGeneration = 0;
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static BufferedWriter bufferedWriter = null;
 
-    public static LinkedHashMap<Integer, Massege> massages = null;
+    public static LinkedHashMap<Integer, Massage> massages = new LinkedHashMap<>();
     public static HashMap<Integer, Chat> chats = new HashMap<>();
     public static HashMap<Integer, Commit> commits = new HashMap<>();
     public static HashMap<Integer, Post> posts = new HashMap<>();
-    public static HashMap<Integer,Group> groups = new HashMap<>();
     public static Stack<Notification> notifications = new Stack<>();
     public static ArrayList<User> allUsers = new ArrayList<>();
 
@@ -34,7 +33,7 @@ public class DataBase {
         }.getType());
         idFileReader.close();
         if (idGeneration == null) {
-            idGeneration=0;
+            idGeneration = 0;
         }
 
 //        MESSAGE
@@ -42,7 +41,7 @@ public class DataBase {
         File massage = new File("files\\massages.json");
         massage.createNewFile();
         FileReader messageFileReader = new FileReader(massage);
-        massages = gson.fromJson(messageFileReader, new TypeToken<LinkedHashMap<Integer, Massege>>() {
+        massages = gson.fromJson(messageFileReader, new TypeToken<LinkedHashMap<Integer, Massage>>() {
         }.getType());
         messageFileReader.close();
         if (massages == null) {
@@ -75,7 +74,7 @@ public class DataBase {
         File commit = new File("files\\commits.json");
         commit.createNewFile();
         FileReader commitFileReader = new FileReader(commit);
-        commits = gson.fromJson(commitFileReader, new TypeToken<HashMap<Integer,Commit>>(){
+        commits = gson.fromJson(commitFileReader, new TypeToken<HashMap<Integer, Commit>>() {
         }.getType());
         commitFileReader.close();
         if (commits == null) {
@@ -101,26 +100,15 @@ public class DataBase {
         if (posts == null) {
             posts = new HashMap<>();
         }
-//        Group
-        File group = new File("files\\groups.json");
-        group.createNewFile();
-        FileReader groupFileReader = new FileReader(group);
-        groups = gson.fromJson(groupFileReader,new TypeToken<HashMap<Integer, Group>>(){
-        }.getType());
-        groupFileReader.close();
-        if(groups == null){
-            groups = new HashMap<>();
-        }
     }
 
     public static void save() throws IOException {
         String s = null;
-
 //        IDGENERATION
 
-        File idFile= new File("files\\idGeneration.json");
+        File idFile = new File("files\\idGeneration.json");
         idFile.createNewFile();
-        s=gson.toJson(idGeneration);
+        s = gson.toJson(idGeneration);
         bufferedWriter = new BufferedWriter((new FileWriter(idFile)));
         bufferedWriter.write(s);
         bufferedWriter.close();
@@ -172,14 +160,5 @@ public class DataBase {
         bufferedWriter = new BufferedWriter((new FileWriter(userWrite)));
         bufferedWriter.write(s);
         bufferedWriter.close();
-//        Group
-        File groupWrite = new File("files\\groups.json");
-        groupWrite.createNewFile();
-        s = gson.toJson(groups);
-        bufferedWriter = new BufferedWriter((new FileWriter(groupWrite)));
-        bufferedWriter.write(s);
-        bufferedWriter.close();
     }
-
-
 }

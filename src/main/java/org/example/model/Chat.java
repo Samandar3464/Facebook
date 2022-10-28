@@ -1,7 +1,6 @@
 package org.example.model;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.example.Base;
+
 import java.util.ArrayList;
 import java.util.List;
 @Data

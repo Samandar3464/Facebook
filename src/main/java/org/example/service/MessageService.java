@@ -1,19 +1,15 @@
 package org.example.service;
 
 import org.example.DataBase;
-import org.example.model.Massege;
+import org.example.model.Massage;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public  class MessageService {
 
-    public boolean addMessage(Massege massege) throws IOException {
-        DataBase.massages.put(massege.getId(), massege);
+    public boolean addMessage(Massage massage) throws IOException {
+        DataBase.massages.put(massage.getId(), massage);
         return true;
     }
 

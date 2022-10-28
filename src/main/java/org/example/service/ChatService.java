@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.example.DataBase;
-import org.example.model.Base;
 import org.example.model.Chat;
 
 import java.util.ArrayList;
