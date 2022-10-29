@@ -54,11 +54,8 @@ public class Main {
                         account(user);
                     }
                 }
-                case 0 -> {
-                    DataBase.save();
-                    return;
-                }
             }
+            DataBase.save();
         }
     }
 
@@ -83,10 +80,8 @@ public class Main {
                         notificationDto.notification(currentUser);
                         System.out.println("0-> back");
                         int requestId = scannerInt.nextInt();
-                        if (requestId == 0) {
-                            DataBase.save();
-                        }
                         if (requestId != 0) {
+                            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA");
                             Notification notification = notificationService.getNotificationById(requestId);
                             if (notification != null && notification.isActive() && notification.getType().equals("request")) {
                                 String s = "";
@@ -105,9 +100,15 @@ public class Main {
                                         System.out.println("Please enter only (y or n)");
                                     }
                                 }
-                            } else if (notification.getType().equals("post")) {
+                            }
+                            else if (notification != null && notification.isActive()&&notification.getType().equals("post")) {
+                                System.out.println("BBBBBBBBBBBBBBBBBB");
                                 System.out.println(notification.getNotificationMessage());
                                 LikeAndCommit(notification);
+                            } else if(notification != null && notification.isActive()) {
+                                System.out.println(notification.getNotificationMessage());
+                                Post post = postService.showOnePost(notification.getPostId(), notification.getReceiverId());
+                                postView(post);
                             }
                         } else varNotion = 0;
                     }
@@ -215,12 +216,10 @@ public class Main {
                         }
                     }
                 }
-
-                case 0 -> {
-                    DataBase.save();
-                }
             }
+            DataBase.save();
         }
+        DataBase.save();
     }
 
     private static void groupView(Group group,User groupUser) throws IOException {
@@ -244,9 +243,11 @@ public class Main {
                         massage = messageDto.createMessage(group.getId(), groupUser.getId(), groupUser.getFirstName());
                     }
                 }
-                case 0->{}
+
             }
+            DataBase.save();
         }
+        DataBase.save();
     }
 
     private static void chatView(Chat chat, User currentUser) throws IOException {
@@ -269,23 +270,23 @@ public class Main {
                     massage = messageDto.createMessage(chat.getId(), currentUser.getId(), currentUser.getFirstName());
                 }
             }
+            DataBase.save();
         }
-
+DataBase.save();
     }
 
     private static void post() throws IOException {
         int varPost = 10;
         while (varPost != 0) {
-            System.out.println("1. Add post 2. Delete post 3.Show one post");
+            System.out.println("1. Add post 2. Delete post 3.Show one post 0-> back");
             varPost = scannerInt.nextInt();
             switch (varPost) {
                 case 1 -> {
                     Post post = postDto.creatPost(user.getId());
                     System.out.println(postService.add(post));
-                    for (Integer integer : user.getFriendsId()) {
-                        Notification post1 = notificationDto.createPostNotification(user.getId(), integer, "post", post.getId(), String.valueOf(post));
-                        notificationService.addPostNotification(post1);
-                    }
+                        String message = "Your friend "+user.getFirstName()+" put new post";
+                        Notification post1 = notificationDto.createPostNotification(user.getId(), "post", post.getId(), message);
+                        notificationService.addNotification(post1);
                 }
                 case 2 -> {
                     postService.showAllPostsCurrentUser(user.getId());
@@ -297,44 +298,61 @@ public class Main {
                     System.out.println("enter post id for see commits and likes");
                     int postId = scannerInt.nextInt();
                     Post post = postService.showOnePost(postId, user.getId());
-                    System.out.println(post);
-                    int varCommit = 10;
-                    while (varCommit != 0) {
-                        System.out.println("1.Likes  2.show commits 0.back");
-                        varCommit = scannerInt.nextInt();
-                        if (varCommit == 1) {
-                            System.out.println("Likes " + post.getLikes().size());
-                        } else if (varCommit == 2) {
-                            commitDto.showCommits(post.getId());
-                        } else {
-                            DataBase.save();
-                            break;
-                        }
-                    }
-                }
-                case 0 -> {
+                    postView(post);
                     DataBase.save();
                 }
             }
+            DataBase.save();
         }
+        DataBase.save();
+    }
+
+    private static void postView(Post post) {
+        System.out.println(post);
+        int varCommit = 10;
+        while (varCommit != 0) {
+            System.out.println("1.Likes  2.show commits 0.back");
+            varCommit = scannerInt.nextInt();
+            if (varCommit == 1) {
+                System.out.println("Likes " + post.getLikes().size());
+            } else if (varCommit == 2) {
+                commitDto.showCommits(post.getId());
+            } else {
+                break;
+            }
+        }
+
     }
 
     private static void LikeAndCommit(Notification notification) throws IOException {
         int varCommit = 10;
         while (varCommit != 0) {
+           if (notification.getType().equals("like")||notification.getType().equals("commit")){
+                Post post = postService.showOnePost(notification.getPostId(),notification.getReceiverId());
+               System.out.println(post.getPost());
+            }
             System.out.println("1.Click like 2. Add commit 3.Delete commit 0->Back");
             varCommit = scannerInt.nextInt();
             if (varCommit == 1) {
-                commitService.clickLike(postService.forNotification(notification.getPostId()),user.getId());
+                String click=commitService.clickLike(postService.forNotification(notification.getPostId()),user.getId());
+                System.out.println(click);
+                String message = user.getFirstName()+" "+click+" your "+ notification.getPostId()+" post";
+                Notification likeNotification = notificationDto.createCommitNotification("like",user.getId(),notification.getSenderId(), notification.getPostId(), message);
+                notificationService.addNotification(likeNotification);
             } else if (varCommit == 2) {
                 Commit commit = commitDto.creatCommit(postService.forNotification(notification.getPostId()), user.getUserName());
+                System.out.println("committed");
+                String message = user.getFirstName()+" commited your "+ notification.getPostId()+" post";
+                Notification commitNotification = notificationDto.createCommitNotification("commit", user.getId(), notification.getSenderId(),notification.getPostId(),message);
+                notificationService.addNotification(commitNotification);
                 System.out.println(commitService.add(commit));
             } else if (varCommit == 3) {
                 System.out.println("enter commit Id");
                 commitService.delete(scannerInt.nextInt(),user.getUserName());
-            } else {
-                DataBase.save();
             }
+                DataBase.save();
+
         }
+        DataBase.save();
     }
 }
