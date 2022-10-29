@@ -1,6 +1,7 @@
 package org.example.dto;
 
 import org.example.DataBase;
+import org.example.model.Notification;
 import org.example.model.User;
 import org.example.service.ChatService;
 import org.example.service.NotificationService;
@@ -105,5 +106,4 @@ public class UserDto {
         String password = scannerStr.nextLine();
         return userService.logIn(phone, password);
     }
-
 }

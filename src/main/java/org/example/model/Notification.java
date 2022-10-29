@@ -10,17 +10,26 @@ public class Notification extends Base {
     private int postId;
     private String notificationMessage;
 
-    public Notification(String type, int senderId, int receiverId,String notificationMessage) {  // request
+    public Notification(String type, int senderId, int receiverId, String notificationMessage) {  // request
         this.type = type;
         this.senderId = senderId;
         this.receiverId = receiverId;
-        this.notificationMessage=notificationMessage;
+        this.notificationMessage = notificationMessage;
     }
 
-    public Notification(int senderId, int postId, String type,String notificationMessage) { // post
-        this.type = type;
-        this.postId = postId;
+    public Notification(int senderId, int postId, String type, String notificationMessage) { // post
         this.senderId = senderId;
-        this.notificationMessage=notificationMessage;
+        this.receiverId = receiverId;
+        this.postId = postId;
+        this.type = type;
+        this.notificationMessage = notificationMessage;
+    }
+
+    public Notification(String type, int senderId, int receiverId, int postId, String notificationMessage) {
+        this.type = type;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.postId = postId;
+        this.notificationMessage = notificationMessage;
     }
 }

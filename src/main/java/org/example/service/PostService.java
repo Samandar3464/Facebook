@@ -18,9 +18,35 @@ public class PostService extends Base {
         }
     }
 
-    public boolean deletePost(int postId) {
-        DataBase.posts.get(postId).setActive(false);
-        return true;
+    public boolean deletePost(int postId ,int userId) {
+        for (Integer integer : DataBase.posts.keySet()) {
+            if (DataBase.posts.get(integer).getOwnerId() == userId && DataBase.posts.get(integer).isActive()) {
+                if(DataBase.posts.get(integer).getId()==postId){
+                    DataBase.posts.get(integer).setActive(false);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public Post showOnePost(int postId, int userId){
+        for (Integer integer : DataBase.posts.keySet()) {
+            if (DataBase.posts.get(integer).getOwnerId() == userId && DataBase.posts.get(integer).isActive()) {
+            if(DataBase.posts.get(integer).getId()==postId)
+                return DataBase.posts.get(integer);
+            }
+        }
+        return null;
+    }
+
+    public Post forNotification(int postId){
+        for (Integer integer : DataBase.posts.keySet()) {
+            if (integer==postId){
+                return DataBase.posts.get(integer);
+            }
+        }
+        return null;
     }
 }
 

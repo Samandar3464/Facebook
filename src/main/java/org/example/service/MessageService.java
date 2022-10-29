@@ -14,7 +14,8 @@ public  class MessageService {
     }
 
     public boolean deleteMessage(int messageId, int userid) throws IOException {
-        if (DataBase.massages.get(messageId)!=null&&DataBase.massages.get(messageId).getSenderId()==userid){
+        if (DataBase.massages==null) return false;
+        if (DataBase.massages.get(messageId)!=null&&DataBase.massages.get(messageId).isActive()&&DataBase.massages.get(messageId).getSenderId()==userid){
             DataBase.massages.get(messageId).setActive(false);
             return true;
         }

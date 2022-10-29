@@ -12,7 +12,6 @@ public class NotificationService {
     public static void addNotification(Notification requestnotification) {
         DataBase.notifications.add(requestnotification);
     }
-
     public static boolean isExitNotification(User currentUser, User user) {
         if (DataBase.notifications.isEmpty()) return false;
         for (Notification notification : DataBase.notifications) {
@@ -24,7 +23,7 @@ public class NotificationService {
     }
 
     public void showNotificationDefaultUser(User user) throws IOException {
-            if (!DataBase.notifications.isEmpty()) System.out.println("\n" + "Enter requestId for acceptance or delete");
+            if (!DataBase.notifications.isEmpty()) System.out.println("\n" + "Enter requestId");
         for (Notification notification : DataBase.notifications) {
             if (notification != null&&notification.isActive()) {
                 if (notification.getType().equals("request")) {
