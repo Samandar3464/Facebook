@@ -12,19 +12,19 @@ public class GroupDto extends Base {
 
     public Group creatGroup(int userId){
         Group group = new Group();
-
         System.out.println("enter group name? ");
         String groupName = scanner.nextLine();
-        if(groupService.checkGroupName(groupName)) {
             System.out.println("enter group descriptions ");
             String description = scanner.nextLine();
+        System.out.println("enter group userName ");
+        String username = scanner.nextLine();
             group.setGroupName(groupName);
             group.setGroupDescriptions(description);
+            group.setUserName(username);
             group.getMembersId().add(userId);
+            group.setAdminId(userId);
             return group;
-        }else {
-            return null;
-        }
+
     }
 
     public boolean joinGroup(int userId,String groupName){

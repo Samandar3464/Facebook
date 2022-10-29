@@ -19,11 +19,19 @@ public class CommitDto {
         post.getCommits().add(commit.getId());
         DataBase.commits.put(commit.getId(), commit);
         return commit;
+
+//        public Commit deleteCommit(int postId, String commitID){
+//            DataBase.commits.remove(commitId);
+//
+//        }
     }
     public void showCommits(int postId){
+        if (DataBase.commits==null) {
+            return;
+        }
         for (Integer integer : DataBase.commits.keySet()) {
-            if (DataBase.commits.get(integer).getPostId()==postId){
-                System.out.println(DataBase.commits.get(integer));
+            if (DataBase.commits.get(integer).isActive()&&DataBase.commits.get(integer).getPostId()==postId){
+                System.out.println(DataBase.commits.get(integer).getId()+" : "+DataBase.commits.get(integer).getCommit());
             }
         }
     }

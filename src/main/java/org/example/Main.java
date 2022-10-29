@@ -21,6 +21,8 @@ public class Main {
     static CommitDto commitDto = new CommitDto();
     static PostDto postDto = new PostDto();
 
+    static GroupDto groupDto = new GroupDto();
+
 
     //    SERVICES
     static UserService userService = new UserService();
@@ -29,6 +31,7 @@ public class Main {
     static CommitService commitService = new CommitService();
     static NotificationService notificationService = new NotificationService();
     static PostService postService = new PostService();
+    static GroupService groupService = new GroupService();
 
     public static void main(String[] args) throws IOException {
         DataBase.start();
@@ -63,7 +66,7 @@ public class Main {
     private static void account(User currentUser) throws IOException {
         int var = 10;
         while (var != 0) {
-            System.out.println("1.Account Sittings 2. Add post 3. Notifications 4.Chat 5. Search 0.Exit account ");
+            System.out.println("1.Account Sittings 2. Add post 3. Notifications 4.Chat 5. Search 6.Group 0.Exit account ");
             var = scannerInt.nextInt();
             switch (var) {
                 case 1 -> {
@@ -104,7 +107,7 @@ public class Main {
                                 }
                             } else if (notification.getType().equals("post")) {
                                 System.out.println(notification.getNotificationMessage());
-LikeAndCommit(notification);
+                                LikeAndCommit(notification);
                             }
                         } else varNotion = 0;
                     }
@@ -165,9 +168,83 @@ LikeAndCommit(notification);
 
                     } else System.out.println("Nothing found");
                 }
+                case 6 -> {
+                    int var13 = 10;
+                    while (var13 != 0) {
+                        System.out.println("1. SEARCH GROUP 2. CREATE GROUP 3. MY GROUPS 0->BACK");
+                        var13 = scannerInt.nextInt();
+                        switch (var13) {
+                            case 1 -> {
+                                System.out.println("Enter group username:");
+                                String groupUserName=scannerStr.nextLine();
+                                Group group = groupService.search(groupUserName);
+                                if (group!=null){
+                                    System.out.println(group.getGroupName()+" is founded");
+                                    System.out.println("1. Join group  0->Back");
+                                    int var12=scannerInt.nextInt();
+                                    if(var12==1){
+                                        group.getMembersId().add(currentUser.getId());
+                                        groupView(group,currentUser);
+                                    }
+                                } else System.out.println("Any group not founded");
+                            }
+                            case 2 -> {
+                                Group group = groupDto.creatGroup(currentUser.getId());
+                                if (groupService.addGroup(group)){
+                                   currentUser.getGroupsId().add(group.getId());
+                                    System.out.println("Succesfully created");
+                                    groupView(group,currentUser);
+                                }else System.out.println("This group already exit");
+                            }
+                            case 3 -> {
+                                groupService.showUserGroups(currentUser);
+                                System.out.println("Enter chosen groupId");
+                                Group groupById = groupService.getById(scannerInt.nextInt());
+                                if (groupById!=null){
+                                    System.out.println("1-> delete group 2-> enter");
+                                    int var14=scannerInt.nextInt();
+                                    if (var14==1){
+                                        groupById.setActive(false);
+                                    }else if (var14==2){
+                                        groupView(groupById,currentUser);
+                                    }
+                                }
+                                else System.out.println("group not founded");
+
+                            }
+                        }
+                    }
+                }
+
                 case 0 -> {
                     DataBase.save();
                 }
+            }
+        }
+    }
+
+    private static void groupView(Group group,User groupUser) throws IOException {
+        int varGroupView=10;
+        while (varGroupView!=0){
+            messageService.showAllMessages(group.getId());
+            System.out.println("1. Delete message 2. Send message 0->Back");
+            varGroupView=scannerInt.nextInt();
+            switch (varGroupView){
+                case 1->{
+                    System.out.println("Enter message Id: ");
+                    int id=scannerInt.nextInt();
+                    if (messageService.deleteMessage(id,groupUser.getId())) System.out.println("Message deleted");
+                    else System.out.println("Message did not deleted");
+                }
+                case 2->{
+                    System.out.println("0-> Back");
+                    Massage massage = messageDto.createMessage(group.getId(), groupUser.getId(), groupUser.getFirstName());
+                    while (massage != null) {
+                        messageService.addMessage(massage);
+                        massage = messageDto.createMessage(group.getId(), groupUser.getId(), groupUser.getFirstName());
+                    }
+                }
+                case 0->{}
             }
         }
     }
@@ -181,7 +258,8 @@ LikeAndCommit(notification);
             if (varChatView == 1) {
                 System.out.println("Enter Id");
                 varChatView = scannerInt.nextInt();
-                if (messageService.deleteMessage(varChatView, currentUser.getId())) System.out.println("Deleted");
+                if (messageService.deleteMessage(varChatView, currentUser.getId()))
+                    System.out.println("Deleted");
                 else System.out.println("was not deleted");
             } else if (varChatView == 2) {
                 System.out.println("0-> back");
@@ -198,14 +276,14 @@ LikeAndCommit(notification);
     private static void post() throws IOException {
         int varPost = 10;
         while (varPost != 0) {
-            System.out.println("1. Add post 2. Delete post 3.show one post");
+            System.out.println("1. Add post 2. Delete post 3.Show one post");
             varPost = scannerInt.nextInt();
             switch (varPost) {
                 case 1 -> {
                     Post post = postDto.creatPost(user.getId());
                     System.out.println(postService.add(post));
                     for (Integer integer : user.getFriendsId()) {
-                        Notification post1 = notificationDto.createPostNotification(user.getId(),integer,"post",post.getId(), String.valueOf(post));
+                        Notification post1 = notificationDto.createPostNotification(user.getId(), integer, "post", post.getId(), String.valueOf(post));
                         notificationService.addPostNotification(post1);
                     }
                 }
@@ -225,10 +303,10 @@ LikeAndCommit(notification);
                         System.out.println("1.Likes  2.show commits 0.back");
                         varCommit = scannerInt.nextInt();
                         if (varCommit == 1) {
-                            System.out.println("Likes " + post.getLikes());
-                        } else if (varCommit==2){
+                            System.out.println("Likes " + post.getLikes().size());
+                        } else if (varCommit == 2) {
                             commitDto.showCommits(post.getId());
-                        }else {
+                        } else {
                             DataBase.save();
                             break;
                         }
@@ -242,16 +320,19 @@ LikeAndCommit(notification);
     }
 
     private static void LikeAndCommit(Notification notification) throws IOException {
-        int varCommit=10;
-        while (varCommit!=0) {
-            System.out.println("1.Click like 2. Add commit 0. back");
-            varCommit=scannerInt.nextInt();
-            if (varCommit==1){
-                commitService.clickLike(postService.forNotification(notification.getPostId()));
-            } else if (varCommit==2) {
+        int varCommit = 10;
+        while (varCommit != 0) {
+            System.out.println("1.Click like 2. Add commit 3.Delete commit 0->Back");
+            varCommit = scannerInt.nextInt();
+            if (varCommit == 1) {
+                commitService.clickLike(postService.forNotification(notification.getPostId()),user.getId());
+            } else if (varCommit == 2) {
                 Commit commit = commitDto.creatCommit(postService.forNotification(notification.getPostId()), user.getUserName());
                 System.out.println(commitService.add(commit));
-            }else {
+            } else if (varCommit == 3) {
+                System.out.println("enter commit Id");
+                commitService.delete(scannerInt.nextInt(),user.getUserName());
+            } else {
                 DataBase.save();
             }
         }

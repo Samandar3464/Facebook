@@ -10,7 +10,7 @@ import java.util.*;
 public class Post extends Base {
 private int ownerId;
 private  String post;
-private int likes;
+private Set<Integer> likes =new HashSet();
 protected List<Integer> commits=new LinkedList<>();
 
     @Override

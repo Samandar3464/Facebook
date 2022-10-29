@@ -101,16 +101,14 @@ public class DataBase {
         if (posts == null) {
             posts = new HashMap<>();
         }
-
-        // Group
-
+//        Group
         File group = new File("files\\groups.json");
         group.createNewFile();
         FileReader groupFileReader = new FileReader(group);
-        groups = gson.fromJson(groupFileReader,new TypeToken<HashMap<Integer, Group>>(){
+        groups = gson.fromJson(groupFileReader, new TypeToken<HashMap<Integer, Group>>() {
         }.getType());
         groupFileReader.close();
-        if(groups == null){
+        if (groups == null) {
             groups = new HashMap<>();
         }
     }
@@ -174,7 +172,7 @@ public class DataBase {
         bufferedWriter.write(s);
         bufferedWriter.close();
 
-        // Group
+//        Group
         File groupWrite = new File("files\\groups.json");
         groupWrite.createNewFile();
         s = gson.toJson(groups);
@@ -182,6 +180,5 @@ public class DataBase {
         bufferedWriter.write(s);
         bufferedWriter.close();
 
-
-         }
+    }
 }
