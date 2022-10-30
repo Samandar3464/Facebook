@@ -1,10 +1,7 @@
 package org.example.service;
 
 import org.example.DataBase;
-import org.example.dto.UserDto;
 import org.example.model.User;
-
-import java.util.ArrayList;
 
 public class UserService {
     public boolean registration(User user) {

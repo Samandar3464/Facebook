@@ -19,7 +19,6 @@ public class Notification extends Base {
 
     public Notification(int senderId, int postId, String type, String notificationMessage) { // post
         this.senderId = senderId;
-        this.receiverId = receiverId;
         this.postId = postId;
         this.type = type;
         this.notificationMessage = notificationMessage;

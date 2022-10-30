@@ -1,10 +1,7 @@
 package org.example.dto;
 
 import org.example.DataBase;
-import org.example.model.Notification;
 import org.example.model.User;
-import org.example.service.ChatService;
-import org.example.service.NotificationService;
 import org.example.service.UserService;
 
 import java.io.IOException;
@@ -15,7 +12,6 @@ public class UserDto {
     static Scanner scannerInt=new Scanner(System.in);
     static UserService userService=new UserService();
 
-    static ChatService chatService=new ChatService();
 
     public User registrationFront() {
         User user = new User();
@@ -41,12 +37,9 @@ public class UserDto {
         int choseGender = scannerInt.nextInt();
         String gender = "";
         switch (choseGender) {
-            case 1 -> {
-                gender = "Male";
-            }
-            case 2 -> {
-                gender = "Female";
-            }
+            case 1 -> gender = "Male";
+
+            case 2 -> gender = "Female";
         }
         user.setGender(gender);
         return user;
@@ -81,20 +74,14 @@ public class UserDto {
                     int choseGender = scannerInt.nextInt();
                     String gender = "";
                     switch (choseGender) {
-                        case 1 -> {
-                            gender = "Male";
-                        }
-                        case 2 -> {
-                            gender = "Female";
-                        }
+                        case 1 -> gender = "Male";
+                        case 2 -> gender = "Female";
                     }
                     user.setGender(gender);
 
                 }
-                case 0 -> {
-                    DataBase.save();
-                }
             }
+            DataBase.save();
         }
         return true;
     }

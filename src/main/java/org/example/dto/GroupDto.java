@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class GroupDto extends Base {
     GroupService groupService = new GroupService();
     Scanner scanner = new Scanner(System.in);
-
     public Group creatGroup(int userId){
         Group group = new Group();
         System.out.println("enter group name? ");
@@ -26,7 +25,6 @@ public class GroupDto extends Base {
             return group;
 
     }
-
     public boolean joinGroup(int userId,String groupName){
         Group search = groupService.search(groupName);
         if (search!=null){

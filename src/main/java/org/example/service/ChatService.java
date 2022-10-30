@@ -4,8 +4,6 @@ import org.example.DataBase;
 import org.example.model.Chat;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ChatService {

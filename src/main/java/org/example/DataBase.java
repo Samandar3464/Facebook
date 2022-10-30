@@ -114,7 +114,7 @@ public class DataBase {
     }
 
     public static void save() throws IOException {
-        String s = null;
+        String s;
 //        IDGENERATION
 
         File idFile = new File("files\\idGeneration.json");

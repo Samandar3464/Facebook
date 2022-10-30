@@ -12,6 +12,7 @@ public class Chat extends Base {
     protected List <Integer> massagesId=new ArrayList<>();
 
     public Chat(int memberId1, String memberName1, int memberId2,String memberName2) {
+        super();
         this.memberId1 = memberId1;
         this.memberName1 = memberName1;
         this.memberName2 = memberName2;
