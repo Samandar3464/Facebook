@@ -17,11 +17,19 @@ public class Notification extends Base {
         this.notificationMessage = notificationMessage;
     }
 
-    public Notification(int senderId, int receiverId, int postId, String type, String notificationMessage) { // post
+    public Notification(int senderId, int postId, String type, String notificationMessage) { // post
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.postId = postId;
         this.type = type;
+        this.notificationMessage = notificationMessage;
+    }
+
+    public Notification(String type, int senderId, int receiverId, int postId, String notificationMessage) {
+        this.type = type;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.postId = postId;
         this.notificationMessage = notificationMessage;
     }
 }

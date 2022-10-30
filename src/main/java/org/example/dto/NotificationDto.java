@@ -22,8 +22,12 @@ public class NotificationDto {
         notificationService.showNotificationDefaultUser(user);
     }
 
-    public Notification createPostNotification( int senderId, int receiverId,String type,int postId,  String notification) {
-        Notification notification1 = new Notification(senderId,receiverId,postId,"post",notification);
+    public Notification createPostNotification( int senderId,String type,int postId,  String notification) {
+        Notification notification1 = new Notification(senderId,postId,"post",notification);
         return notification1;
+    }
+
+    public Notification createCommitNotification(String type, int senderId, int receiverId,int postId, String message) {
+        return new Notification(type,senderId,receiverId,postId,message);
     }
 }

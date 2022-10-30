@@ -11,12 +11,13 @@ public class CommitService extends Base {
     }
 
 
-    public void clickLike(Post post, int id){
-        if (post.getLikes().add(id)) {
-            System.out.println("Liked");
+    public String clickLike(Post post, int id){
+        if (!post.getLikes().contains(id)) {
+            post.getLikes().add(id);
+            return "Liked";
         } else {
             post.getLikes().remove(id);
-            System.out.println("disliked");
+            return "disliked";
         }
     }
 

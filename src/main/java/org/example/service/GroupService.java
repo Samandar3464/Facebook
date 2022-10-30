@@ -7,9 +7,6 @@ import org.example.model.User;
 import java.util.Map;
 
 public class GroupService {
-    MessageService messageService = new MessageService();
-    Group group = new Group();
-
     public boolean addGroup(Group group) {
         if (DataBase.groups.isEmpty() || DataBase.groups.get(group.getId()) == null) {
             for (Map.Entry<Integer, Group> integerGroupEntry : DataBase.groups.entrySet()) {
@@ -33,19 +30,6 @@ public class GroupService {
     }
 
 
-    public void showAllMessagesInGroup(int groupId, int userId) {
-
-        System.out.println(group.getGroupName());
-        if (getById(groupId) != null) {
-            for (Integer integer : getById(groupId).getMembersId()) {
-                if (integer == userId) {
-                    messageService.showAllMessages(groupId);
-                }
-            }
-        } else {
-            System.out.println("group nut found");
-        }
-    }
 
     public Group getById(int groupId) {
         for (Integer integer : DataBase.groups.keySet()) {
