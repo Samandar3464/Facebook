@@ -17,7 +17,7 @@ public class Main {
     static UserDto userDto = new UserDto();
     static NotificationDto notificationDto = new NotificationDto();
     static MessageDto messageDto = new MessageDto();
-    static ChatDto chatDto = new ChatDto();
+
     static CommitDto commitDto = new CommitDto();
     static PostDto postDto = new PostDto();
 
@@ -63,7 +63,7 @@ public class Main {
     private static void account(User currentUser) throws IOException {
         int var = 10;
         while (var != 0) {
-            System.out.println("1.Account Sittings 2. Add post 3. Notifications 4.Chat 5. Search 6.Group 0.Exit account ");
+            System.out.println("1.Account Sittings 2. Post 3. Notifications 4.Chat 5. Search 6.Group 0.Exit account ");
             var = scannerInt.nextInt();
             switch (var) {
                 case 1 -> {
@@ -81,7 +81,6 @@ public class Main {
                         System.out.println("0-> back");
                         int requestId = scannerInt.nextInt();
                         if (requestId != 0) {
-                            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA");
                             Notification notification = notificationService.getNotificationById(requestId);
                             if (notification != null && notification.isActive() && notification.getType().equals("request")) {
                                 String s = "";
@@ -93,7 +92,7 @@ public class Main {
                                         userService.getById(notification.getSenderId()).getFriendsId().add(currentUser.getId());
                                         notification.setActive(false);
                                         System.out.println("you accepted");
-                                    } else if (s.equals("y")) {
+                                    } else if (s.equals("n")) {
                                         notification.setActive(false);
                                         System.out.println("you did not accept");
                                     } else {
@@ -102,7 +101,6 @@ public class Main {
                                 }
                             }
                             else if (notification != null && notification.isActive()&&notification.getType().equals("post")) {
-                                System.out.println("BBBBBBBBBBBBBBBBBB");
                                 System.out.println(notification.getNotificationMessage());
                                 LikeAndCommit(notification);
                             } else if(notification != null && notification.isActive()) {
@@ -147,9 +145,9 @@ public class Main {
                             }
                             if (varSearch == 1) {
                                 if (!currentUser.getFriendsId().contains(user.getId())) {
-                                    if (!NotificationService.isExitNotification(currentUser, user)) {
+                                    if (!notificationService.isExitNotification(currentUser, user)) {
                                         Notification requestNotification = notificationDto.createRequestNotification(currentUser, user);
-                                        NotificationService.addNotification(requestNotification);
+                                        notificationService.addNotification(requestNotification);
                                         System.out.println("Request sanded ");
                                     } else System.out.println("Request already sanded");
                                 } else System.out.println("You are friends");
@@ -193,7 +191,7 @@ public class Main {
                                 Group group = groupDto.creatGroup(currentUser.getId());
                                 if (groupService.addGroup(group)){
                                    currentUser.getGroupsId().add(group.getId());
-                                    System.out.println("Succesfully created");
+                                    System.out.println("Successfully created");
                                     groupView(group,currentUser);
                                 }else System.out.println("This group already exit");
                             }
@@ -284,7 +282,7 @@ DataBase.save();
                 case 1 -> {
                     Post post = postDto.creatPost(user.getId());
                     System.out.println(postService.add(post));
-                        String message = "Your friend "+user.getFirstName()+" put new post";
+                        String message = "Your friend "+user.getFirstName()+" put new post ("+post.getPost()+")";
                         Notification post1 = notificationDto.createPostNotification(user.getId(), "post", post.getId(), message);
                         notificationService.addNotification(post1);
                 }
@@ -314,11 +312,10 @@ DataBase.save();
             System.out.println("1.Likes  2.show commits 0.back");
             varCommit = scannerInt.nextInt();
             if (varCommit == 1) {
-                System.out.println("Likes " + post.getLikes().size());
+                if (post.getLikes().size()==0) System.out.println("There are any likes");
+                else System.out.println("Likes " + post.getLikes().size());
             } else if (varCommit == 2) {
                 commitDto.showCommits(post.getId());
-            } else {
-                break;
             }
         }
 
@@ -342,7 +339,7 @@ DataBase.save();
             } else if (varCommit == 2) {
                 Commit commit = commitDto.creatCommit(postService.forNotification(notification.getPostId()), user.getUserName());
                 System.out.println("committed");
-                String message = user.getFirstName()+" commited your "+ notification.getPostId()+" post";
+                String message = user.getFirstName()+" committed your "+ notification.getPostId()+" post";
                 Notification commitNotification = notificationDto.createCommitNotification("commit", user.getId(), notification.getSenderId(),notification.getPostId(),message);
                 notificationService.addNotification(commitNotification);
                 System.out.println(commitService.add(commit));

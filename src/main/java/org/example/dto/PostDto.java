@@ -17,7 +17,6 @@ public class PostDto {
     }
    public int deletePost(){
        System.out.println("enter post id for delete ");
-       int postId= scanner.nextInt();
-       return postId;
+       return scanner.nextInt();
    }
 }

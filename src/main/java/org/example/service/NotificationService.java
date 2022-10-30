@@ -9,10 +9,10 @@ import java.io.IOException;
 
 
 public class NotificationService {
-    public static void addNotification(Notification requestnotification) {
+    public  void addNotification(Notification requestnotification) {
         DataBase.notifications.add(requestnotification);
     }
-    public static boolean isExitNotification(User currentUser, User user) {
+    public  boolean isExitNotification(User currentUser, User user) {
         if (DataBase.notifications.isEmpty()) return false;
         for (Notification notification : DataBase.notifications) {
             if (notification!=null&&notification.isActive()){
